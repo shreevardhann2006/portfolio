@@ -1,25 +1,4 @@
-// 1. Initialize Vanta.js (Network)
-document.addEventListener('DOMContentLoaded', () => {
-    if (window.VANTA) {
-        VANTA.NET({
-            el: "#vanta-bg",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x00f2fe,
-            backgroundColor: 0x050505,
-            points: 12.00,
-            maxDistance: 22.00,
-            spacing: 18.00
-        });
-    }
-});
-
-// 2. Custom Cursor Logic
+// 1. Custom Cursor Logic
 const cursorDot = document.querySelector('[data-cursor-dot]');
 const cursorOutline = document.querySelector('[data-cursor-outline]');
 
@@ -30,80 +9,122 @@ window.addEventListener('mousemove', (e) => {
     cursorDot.style.left = `${posX}px`;
     cursorDot.style.top = `${posY}px`;
 
+    // Add a slight delay for the outline for a smooth effect
     cursorOutline.animate({
         left: `${posX}px`,
         top: `${posY}px`
-    }, { duration: 300, fill: "forwards" });
+    }, { duration: 500, fill: "forwards" });
 });
 
-// Cursor expansion on interactive elements
+// Expand cursor on interactive elements
 const interactives = document.querySelectorAll('a, button, .btn-primary, .btn-secondary');
 interactives.forEach(el => {
     el.addEventListener('mouseenter', () => {
         cursorOutline.style.width = '60px';
         cursorOutline.style.height = '60px';
         cursorOutline.style.backgroundColor = 'rgba(0, 242, 254, 0.1)';
-        cursorOutline.style.mixBlendMode = 'difference'; // Adds a cool premium feel
     });
     el.addEventListener('mouseleave', () => {
         cursorOutline.style.width = '40px';
         cursorOutline.style.height = '40px';
         cursorOutline.style.backgroundColor = 'transparent';
-        cursorOutline.style.mixBlendMode = 'normal';
     });
 });
 
-// 3. Advanced Card Glow Effects (Mouse Tracking)
-const cards = document.querySelectorAll('.skill-card, .project-card');
-cards.forEach(card => {
-    card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-    });
-});
-
-// 4. Vanilla Tilt for Cards
-if (typeof VanillaTilt !== 'undefined') {
-    VanillaTilt.init(document.querySelectorAll(".skill-card, .project-card, .about-content"), {
-        max: 10,
-        speed: 400,
-        glare: true,
-        "max-glare": 0.1,
-        gyroscope: true
-    });
-}
-
-// (Removed GSAP Scroll Animations to guarantee 100% text visibility instantly)
-
-// 6. Typing Effect for Hero Subtitle
+// 2. Typing Effect for Hero Subtitle
 const subtitleEl = document.querySelector('.hero-subtitle');
 if (subtitleEl) {
     const textToType = subtitleEl.textContent.trim();
-    subtitleEl.textContent = ''; 
+    subtitleEl.textContent = ''; // Clear text
     let index = 0;
     
     function typeText() {
         if (index < textToType.length) {
             subtitleEl.textContent += textToType.charAt(index);
             index++;
-            setTimeout(typeText, Math.random() * 20 + 30); 
+            // Randomize typing speed slightly
+            setTimeout(typeText, Math.random() * 50 + 50); 
         }
     }
-    setTimeout(typeText, 300);
+    // Start typing after a short delay
+    setTimeout(typeText, 500);
 }
 
-// 7. Navbar Scrolled State
+// 3. 3D Tilt Effect on Cards
+const tiltCards = document.querySelectorAll('.skill-card, .project-card, .about-content');
+
+tiltCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left; // x position within the element
+        const y = e.clientY - rect.top;  // y position within the element
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        // Calculate tilt amounts (max 10 degrees)
+        const tiltX = ((y - centerY) / centerY) * -10;
+        const tiltY = ((x - centerX) / centerX) * 10;
+        
+        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+        card.style.transition = 'none'; // Remove transition during hover for instant response
+    });
+    
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        card.style.transition = 'transform 0.5s ease'; // Add transition back for smooth reset
+    });
+});
+
+
+// 4. Add scroll event to navbar for dynamic styling
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
         navbar.style.background = 'rgba(10, 10, 15, 0.95)';
         navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.5)';
     } else {
-        navbar.style.background = 'transparent';
+        navbar.style.background = 'var(--glass-bg)';
         navbar.style.boxShadow = 'none';
     }
+});
+
+// 5. Staggered Smooth reveal animation for sections
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.15
+};
+
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            // Add a staggered delay based on the index of elements entering simultaneously
+            setTimeout(() => {
+                entry.target.classList.add('visible');
+            }, index * 100); 
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+document.addEventListener('DOMContentLoaded', () => {
+    const animatedElements = document.querySelectorAll('.fade-up');
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                window.scrollTo({
+                    top: target.offsetTop - 80, // Adjust for navbar height
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
 });
