@@ -71,24 +71,18 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 
     const bentoItems = gsap.utils.toArray('.bento-item');
-    
-    // Initial state: hide items
-    gsap.set(bentoItems, { 
-        y: 100, 
-        opacity: 0,
-        scale: 0.95
-    });
 
-    // Reveal items sequentially as they enter viewport
+    // Reveal items sequentially as they enter viewport using .from() so they don't get stuck hidden
     ScrollTrigger.batch(bentoItems, {
         onEnter: batch => {
-            gsap.to(batch, {
-                opacity: 1, 
-                y: 0,
-                scale: 1,
+            gsap.from(batch, {
+                opacity: 0, 
+                y: 100,
+                scale: 0.95,
                 stagger: 0.15,
                 duration: 0.8,
-                ease: "power3.out"
+                ease: "power3.out",
+                overwrite: true
             });
         },
         start: "top 85%",
