@@ -1,14 +1,14 @@
 /* Design System & Global Styles - Nebula Glass Theme */
 :root {
-    /* Colors - Stark Contrast Theme */
-    --bg-color: #030303;
-    --surface-color: rgba(20, 20, 20, 0.6);
+    /* Colors - Deep Dark Theme Default */
+    --bg-color: #050505;
+    --surface-color: rgba(20, 20, 25, 0.4);
     --text-primary: #ffffff;
-    --text-secondary: #999999;
-    --accent-color: #FF4B00;
-    --accent-hover: #FF7539;
-    --gradient-primary: linear-gradient(135deg, #FF4B00 0%, #FF7539 100%);
-    --gradient-glow: rgba(255, 75, 0, 0.3);
+    --text-secondary: #a1a1aa;
+    --accent-color: #00f2fe;
+    --accent-hover: #4facfe;
+    --gradient-primary: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+    --gradient-glow: rgba(0, 242, 254, 0.5);
     
     /* Typography */
     --font-sans: 'Plus Jakarta Sans', sans-serif;
@@ -16,13 +16,13 @@
     
     /* Spacing & Layout */
     --max-width: 1200px;
-    --section-padding: 4rem 2rem;
+    --section-padding: 6rem 2rem;
     
     /* Effects */
-    --transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-    --glass-bg: rgba(15, 15, 15, 0.8);
-    --glass-border: 1px solid rgba(255, 255, 255, 0.05);
-    --glass-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --glass-bg: rgba(10, 10, 15, 0.7);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 * {
@@ -44,15 +44,24 @@ body {
     position: relative;
 }
 
-/* Vanta JS Background Container */
-#vanta-canvas {
+/* Animated Mesh Gradient Background */
+body::before {
+    content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -2;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(79, 172, 254, 0.05), transparent 60%),
+                radial-gradient(circle at 80% 20%, rgba(0, 242, 254, 0.05), transparent 40%);
+    z-index: -1;
+    animation: rotate 60s linear infinite;
     pointer-events: none;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* Typography Utilities */
