@@ -77,41 +77,7 @@ if (typeof VanillaTilt !== 'undefined') {
     });
 }
 
-// 5. GSAP Scroll Animations (Fail-safe)
-document.addEventListener('DOMContentLoaded', () => {
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        gsap.registerPlugin(ScrollTrigger);
-        
-        // Use .from() so they don't get stuck hidden if script fails before ScrollTrigger runs
-        const sectionsToAnimate = gsap.utils.toArray('.fade-up, .skill-card, .project-card');
-        
-        sectionsToAnimate.forEach(section => {
-            gsap.from(section, {
-                scrollTrigger: {
-                    trigger: section,
-                    start: "top 85%", // Reveal when top of element reaches 85% of viewport
-                    toggleActions: "play none none none" 
-                },
-                opacity: 0,
-                y: 50,
-                duration: 0.8,
-                ease: "power3.out"
-            });
-        });
-        
-        // Parallax Avatar
-        gsap.to(".profile-avatar-container", {
-            yPercent: 30,
-            ease: "none",
-            ScrollTrigger: {
-                trigger: ".hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: true
-            }
-        });
-    }
-});
+// (Removed GSAP Scroll Animations to guarantee 100% text visibility instantly)
 
 // 6. Typing Effect for Hero Subtitle
 const subtitleEl = document.querySelector('.hero-subtitle');
