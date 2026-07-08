@@ -182,6 +182,13 @@
     transition: var(--transition);
     position: relative;
     overflow: hidden;
+    transform-style: preserve-3d;
+}
+
+.parallax-content {
+    transform: translateZ(40px);
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
 }
 
 /* Tracking Glow Border Effect */
@@ -283,6 +290,12 @@
     transition: var(--transition);
     margin-bottom: 3rem;
     position: relative;
+    transform-style: preserve-3d;
+}
+
+.project-content {
+    transform: translateZ(50px);
+    transform-style: preserve-3d;
 }
 
 .project-card:hover {
