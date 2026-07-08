@@ -16,7 +16,7 @@ window.addEventListener('mousemove', (e) => {
     }, { duration: 500, fill: "forwards" });
 });
 
-// Expand cursor on interactive elements
+// Expand cursor on interactive elements and Magnetic Button Effect
 const interactives = document.querySelectorAll('a, button, .btn-primary, .btn-secondary');
 interactives.forEach(el => {
     el.addEventListener('mouseenter', () => {
@@ -28,36 +28,66 @@ interactives.forEach(el => {
         cursorOutline.style.width = '40px';
         cursorOutline.style.height = '40px';
         cursorOutline.style.backgroundColor = 'transparent';
+        
+        // Reset magnetic effect
+        if(el.classList.contains('btn-primary') || el.classList.contains('btn-secondary')) {
+            el.style.transform = 'translate(0px, 0px)';
+        }
+    });
+
+    // Magnetic pull for buttons
+    el.addEventListener('mousemove', (e) => {
+        if(el.classList.contains('btn-primary') || el.classList.contains('btn-secondary')) {
+            const rect = el.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            // Pull the button slightly towards the cursor
+            el.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+        }
     });
 });
 
-// 2. Typing Effect for Hero Subtitle
+// 2. Cyber Scramble Effect for Hero Subtitle
 const subtitleEl = document.querySelector('.hero-subtitle');
 if (subtitleEl) {
-    const textToType = subtitleEl.textContent.trim();
-    subtitleEl.textContent = ''; // Clear text
-    let index = 0;
-    
-    function typeText() {
-        if (index < textToType.length) {
-            subtitleEl.textContent += textToType.charAt(index);
-            index++;
-            // Randomize typing speed slightly
-            setTimeout(typeText, Math.random() * 50 + 50); 
-        }
-    }
-    // Start typing after a short delay
-    setTimeout(typeText, 500);
+    const originalText = subtitleEl.textContent.trim();
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+    let iteration = 0;
+    let interval = null;
+
+    setTimeout(() => {
+        interval = setInterval(() => {
+            subtitleEl.innerText = originalText.split("")
+                .map((letter, index) => {
+                    if (index < iteration) {
+                        return originalText[index];
+                    }
+                    return letters[Math.floor(Math.random() * 70)];
+                })
+                .join("");
+
+            if (iteration >= originalText.length) {
+                clearInterval(interval);
+            }
+            iteration += 1 / 3;
+        }, 30);
+    }, 500);
 }
 
 // 3. 3D Tilt Effect on Cards
-const tiltCards = document.querySelectorAll('.skill-card, .project-card, .about-content');
+// 3. 3D Tilt Effect & Glow Tracking on Cards
+const tiltCards = document.querySelectorAll('.skill-card, .project-card, .about-content, .contact');
 
 tiltCards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left; // x position within the element
         const y = e.clientY - rect.top;  // y position within the element
+        
+        // Update variables for glow effect in CSS
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
         
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
