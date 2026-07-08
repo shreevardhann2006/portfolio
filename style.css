@@ -56,7 +56,7 @@ body::before {
         radial-gradient(circle at 15% 50%, rgba(180, 41, 249, 0.08), transparent 40%),
         radial-gradient(circle at 85% 30%, rgba(0, 242, 254, 0.08), transparent 40%),
         radial-gradient(circle at 50% 80%, rgba(255, 42, 133, 0.05), transparent 50%);
-    z-index: -2;
+    z-index: -3; /* Moved back for canvas */
     animation: aurora 20s ease-in-out infinite alternate;
     pointer-events: none;
     filter: blur(60px);
@@ -68,8 +68,108 @@ body::after {
     top: 0; left: 0; width: 100%; height: 100%;
     background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
     opacity: 0.03;
+    z-index: -2;
+    pointer-events: none;
+}
+
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: -1;
     pointer-events: none;
+}
+
+/* Splash Screen */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s cubic-bezier(0.77, 0, 0.175, 1), visibility 1s;
+}
+
+.splash-text {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.splash-text::before, .splash-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.splash-text::before {
+    left: 2px;
+    text-shadow: -2px 0 red;
+    animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.splash-text::after {
+    left: -2px;
+    text-shadow: -2px 0 blue;
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.splash-bar {
+    width: 200px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.splash-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--gradient-primary);
+    box-shadow: 0 0 10px var(--accent-color);
+    animation: loading 2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes loading {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+@keyframes glitch-anim-1 {
+    0% { clip: rect(20px, 9999px, 85px, 0); }
+    20% { clip: rect(92px, 9999px, 9px, 0); }
+    40% { clip: rect(41px, 9999px, 12px, 0); }
+    60% { clip: rect(72px, 9999px, 60px, 0); }
+    80% { clip: rect(5px, 9999px, 96px, 0); }
+    100% { clip: rect(38px, 9999px, 19px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip: rect(43px, 9999px, 5px, 0); }
+    20% { clip: rect(11px, 9999px, 88px, 0); }
+    40% { clip: rect(77px, 9999px, 34px, 0); }
+    60% { clip: rect(2px, 9999px, 98px, 0); }
+    80% { clip: rect(66px, 9999px, 20px, 0); }
+    100% { clip: rect(91px, 9999px, 44px, 0); }
 }
 
 @keyframes aurora {
@@ -222,8 +322,8 @@ footer {
 /* Animations */
 .fade-up {
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(40px) scale(0.98);
+    transition: opacity 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .fade-up.visible {
@@ -248,8 +348,8 @@ body, a, button, .btn-primary, .btn-secondary {
 }
 
 .cursor-dot {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     background-color: var(--accent-color);
     mix-blend-mode: difference;
 }
@@ -258,6 +358,21 @@ body, a, button, .btn-primary, .btn-secondary {
     width: 40px;
     height: 40px;
     border: 1px solid var(--accent-hover);
-    transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease-out;
+    transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease-out, border-radius 0.3s ease-out, border-color 0.3s ease-out;
     mix-blend-mode: screen;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--gradient-primary);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-hover);
 }
