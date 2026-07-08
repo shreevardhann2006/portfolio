@@ -1,14 +1,14 @@
 /* Design System & Global Styles - Nebula Glass Theme */
 :root {
-    /* Colors - Deep Dark Theme Default */
-    --bg-color: #050505;
-    --surface-color: rgba(20, 20, 25, 0.4);
-    --text-primary: #ffffff;
-    --text-secondary: #a1a1aa;
+    /* Colors - Cyberpunk Aurora Theme */
+    --bg-color: #030005;
+    --surface-color: rgba(15, 10, 25, 0.4);
+    --text-primary: #f0f0f5;
+    --text-secondary: #9b9bb2;
     --accent-color: #00f2fe;
-    --accent-hover: #4facfe;
-    --gradient-primary: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-    --gradient-glow: rgba(0, 242, 254, 0.5);
+    --accent-hover: #b429f9;
+    --gradient-primary: linear-gradient(135deg, #00f2fe 0%, #b429f9 100%);
+    --gradient-glow: rgba(180, 41, 249, 0.5);
     
     /* Typography */
     --font-sans: 'Plus Jakarta Sans', sans-serif;
@@ -20,9 +20,9 @@
     
     /* Effects */
     --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --glass-bg: rgba(10, 10, 15, 0.7);
-    --glass-border: 1px solid rgba(255, 255, 255, 0.08);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --glass-bg: rgba(5, 2, 10, 0.7);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.05);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -44,7 +44,7 @@ body {
     position: relative;
 }
 
-/* Animated Mesh Gradient Background */
+/* Animated Aurora Background */
 body::before {
     content: '';
     position: fixed;
@@ -52,16 +52,30 @@ body::before {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle at 50% 50%, rgba(79, 172, 254, 0.05), transparent 60%),
-                radial-gradient(circle at 80% 20%, rgba(0, 242, 254, 0.05), transparent 40%);
+    background: 
+        radial-gradient(circle at 15% 50%, rgba(180, 41, 249, 0.08), transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(0, 242, 254, 0.08), transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(255, 42, 133, 0.05), transparent 50%);
+    z-index: -2;
+    animation: aurora 20s ease-in-out infinite alternate;
+    pointer-events: none;
+    filter: blur(60px);
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+    opacity: 0.03;
     z-index: -1;
-    animation: rotate 60s linear infinite;
     pointer-events: none;
 }
 
-@keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+@keyframes aurora {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(5deg) scale(1.1); }
+    100% { transform: rotate(-5deg) scale(1); }
 }
 
 /* Typography Utilities */
@@ -93,20 +107,23 @@ a {
 
 /* Buttons */
 .btn-primary {
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     padding: 0.8rem 2rem;
     background: var(--gradient-primary);
     color: #000;
     border-radius: 50px;
     font-weight: 700;
     letter-spacing: 0.5px;
-    transition: var(--transition);
     border: none;
     cursor: pointer;
     box-shadow: 0 4px 15px var(--gradient-glow);
     position: relative;
     overflow: hidden;
     z-index: 1;
+    /* transition handled by JS magnetic effect mostly, but keep baseline */
+    transition: box-shadow 0.3s ease, color 0.3s ease;
 }
 
 .btn-primary::before {
@@ -114,9 +131,11 @@ a {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    width: 150%;
+    height: 150%;
+    left: -25%;
+    top: -25%;
+    background: linear-gradient(135deg, #b429f9 0%, #00f2fe 100%);
     z-index: -1;
     transition: var(--transition);
     opacity: 0;
@@ -127,8 +146,8 @@ a {
 }
 
 .btn-primary:hover {
-    transform: translateY(-3px) scale(1.02);
     box-shadow: 0 10px 25px var(--gradient-glow);
+    color: #fff;
 }
 
 /* Navbar */
@@ -232,11 +251,13 @@ body, a, button, .btn-primary, .btn-secondary {
     width: 8px;
     height: 8px;
     background-color: var(--accent-color);
+    mix-blend-mode: difference;
 }
 
 .cursor-outline {
     width: 40px;
     height: 40px;
-    border: 2px solid var(--accent-hover);
-    transition: width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out;
+    border: 1px solid var(--accent-hover);
+    transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease-out;
+    mix-blend-mode: screen;
 }
