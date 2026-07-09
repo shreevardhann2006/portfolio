@@ -59,6 +59,29 @@ body::before {
     pointer-events: none;
 }
 
+/* Glassmorphism Floating Orbs */
+body::after {
+    content: '';
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    background: var(--gradient-primary);
+    filter: blur(100px);
+    border-radius: 50%;
+    top: 20%;
+    left: 10%;
+    z-index: -1;
+    animation: float 20s ease-in-out infinite alternate;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30vw, 20vh) scale(1.2); }
+    100% { transform: translate(-10vw, 40vh) scale(0.9); }
+}
+
 @keyframes rotate {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -200,17 +223,11 @@ footer {
     background: var(--glass-bg);
 }
 
-/* Animations */
-.fade-up {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+/* Navbar active link state */
+.nav-links a.active {
+    color: var(--accent-color);
 }
 
-.fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
 
 /* Custom Cursor */
 body, a, button, .btn-primary, .btn-secondary {

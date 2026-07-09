@@ -32,48 +32,27 @@ interactives.forEach(el => {
 });
 
 // 2. Typing Effect for Hero Subtitle
-const subtitleEl = document.querySelector('.hero-subtitle');
-if (subtitleEl) {
-    const textToType = subtitleEl.textContent.trim();
-    subtitleEl.textContent = ''; // Clear text
-    let index = 0;
-    
-    function typeText() {
-        if (index < textToType.length) {
-            subtitleEl.textContent += textToType.charAt(index);
-            index++;
-            // Randomize typing speed slightly
-            setTimeout(typeText, Math.random() * 50 + 50); 
-        }
-    }
-    // Start typing after a short delay
-    setTimeout(typeText, 500);
-}
+const typed = new Typed('.typed-text', {
+    strings: [
+        'Programming',
+        'Software Development',
+        'Web Application Development',
+        'AI Tools and Automation',
+        'ECE pre-final year student at MKCE',
+        'developer at cracoe.'
+    ],
+    typeSpeed: 50,
+    backSpeed: 30,
+    loop: true,
+    backDelay: 1500
+});
 
 // 3. 3D Tilt Effect on Cards
-const tiltCards = document.querySelectorAll('.skill-card, .project-card, .about-content');
-
-tiltCards.forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left; // x position within the element
-        const y = e.clientY - rect.top;  // y position within the element
-        
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        // Calculate tilt amounts (max 10 degrees)
-        const tiltX = ((y - centerY) / centerY) * -10;
-        const tiltY = ((x - centerX) / centerX) * 10;
-        
-        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
-        card.style.transition = 'none'; // Remove transition during hover for instant response
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-        card.style.transition = 'transform 0.5s ease'; // Add transition back for smooth reset
-    });
+VanillaTilt.init(document.querySelectorAll('.skill-card, .project-card, .about-content'), {
+    max: 10,
+    speed: 400,
+    glare: true,
+    "max-glare": 0.2
 });
 
 
@@ -89,30 +68,14 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// 5. Staggered Smooth reveal animation for sections
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.15
-};
-
-const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            // Add a staggered delay based on the index of elements entering simultaneously
-            setTimeout(() => {
-                entry.target.classList.add('visible');
-            }, index * 100); 
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
+// 5. Initialize AOS (Animate On Scroll)
+AOS.init({
+    duration: 800,
+    once: false,
+    offset: 100,
+});
 
 document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.fade-up');
-    animatedElements.forEach(el => {
-        observer.observe(el);
-    });
     
     // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
