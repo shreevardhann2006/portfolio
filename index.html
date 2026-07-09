@@ -5,187 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio of Shreevardhann A. - Full Stack Developer">
     <title>Shreevardhann A. | Developer</title>
+    <!-- Modern Sans-serif Font similar to the design -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="sections.css">
 </head>
 <body>
-    <!-- Custom Minimal Cursor -->
-    <div class="cursor-dot" data-cursor-dot></div>
-    <div class="cursor-outline" data-cursor-outline></div>
+    <!-- Animated Aurora Background -->
+    <div class="aurora-bg">
+        <div class="aurora-blob blob-1"></div>
+        <div class="aurora-blob blob-2"></div>
+        <div class="aurora-blob blob-3"></div>
+    </div>
+    
+    <!-- Background Mouse Tracker Glow -->
+    <div class="mouse-glow" id="mouse-glow"></div>
 
-    <!-- Header Navigation -->
-    <header id="navbar">
-        <div class="container nav-content">
-            <a href="#" class="logo">Shreevardhann<span class="highlight">.</span></a>
-            <nav class="nav-links">
-                <a href="#about">About</a>
-                <a href="#skills">Skills</a>
-                <a href="#projects">Work</a>
-                <a href="https://wa.me/919543996929" target="_blank" class="btn-primary">Let's Talk</a>
-            </nav>
+    <main class="main-content">
+        <div class="bento-container">
+            
+            <!-- Intro Card -->
+            <div class="bento-box card-intro bento-reveal">
+                <div class="bento-inner">
+                    <h1 class="intro-title">Hello, I'm Shreevardhann.</h1>
+                    <p class="intro-subtitle">software dev / web specialist</p>
+                    <p class="intro-desc">Currently an ECE Pre-Final Year Student at MKCE & Developer at CRACOE.</p>
+                    <div class="intro-links">
+                        <a href="https://wa.me/919543996929" target="_blank" class="btn-glow">Let's Talk</a>
+                        <a href="http://www.linkedin.com/in/shreevardhann-a-955848348" target="_blank" class="btn-outline">LinkedIn</a>
+                        <a href="https://github.com/shreevardhann2006" target="_blank" class="btn-outline">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Card -->
+            <div class="bento-box card-profile bento-reveal">
+                <div class="bento-inner flex-center column">
+                    <div class="profile-img-ring">
+                        <img src="profile.jpeg" alt="Shreevardhann A." class="profile-img">
+                    </div>
+                    <h2 class="profile-name">Shreevardhann A.</h2>
+                    <p class="profile-title">Tech-professional</p>
+                </div>
+            </div>
+
+            <!-- Experience Metric -->
+            <div class="bento-box card-metric bento-reveal">
+                <div class="bento-inner flex-center column">
+                    <h2 class="metric-number"><span class="counter" data-target="3">0</span>+</h2>
+                    <p class="metric-label">Hackathons</p>
+                </div>
+            </div>
+
+            <!-- Projects Metric -->
+            <div class="bento-box card-metric bento-reveal">
+                <div class="bento-inner flex-center column">
+                    <h2 class="metric-number"><span class="counter" data-target="10">0</span>+</h2>
+                    <p class="metric-label">Projects</p>
+                </div>
+            </div>
+
+            <!-- Featured Projects Card -->
+            <div class="bento-box card-featured bento-reveal">
+                <div class="bento-inner">
+                    <div class="card-header">
+                        <span class="header-title">FEATURED PROJECTS</span>
+                        <span class="header-dots">...</span>
+                    </div>
+                    <div class="projects-grid">
+                        
+                        <!-- Project 1 -->
+                        <div class="project-item">
+                            <div class="project-mockup">
+                                <div class="mockup-screen">
+                                    <h4>Workflow Pro (Cracoe)</h4>
+                                    <p>High-performance analytics web application.</p>
+                                    <a href="https://workflow-pro-cracokoe.vercel.app/" target="_blank" class="mockup-btn">View App</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="project-item">
+                            <div class="project-mockup">
+                                <div class="mockup-screen">
+                                    <h4>Eatwise</h4>
+                                    <p>Data-driven mobile nutrition application.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 3 -->
+                        <div class="project-item">
+                            <div class="project-mockup">
+                                <div class="mockup-screen">
+                                    <h4>Health Monitor</h4>
+                                    <p>IoT wearable for disaster response workers.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech Stack Card -->
+            <div class="bento-box card-stack bento-reveal">
+                <div class="bento-inner">
+                    <div class="card-header">
+                        <span class="header-title">TECH STACK</span>
+                    </div>
+                    <div class="stack-grid">
+                        <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python"></div>
+                        <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JS"></div>
+                        <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java"></div>
+                        <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" alt="React"></div>
+                        <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML"></div>
+                        <div class="tech-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS"></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </header>
-
-    <main>
-        <!-- Hero Section -->
-        <section id="hero" class="hero section-padding fade-up">
-            <div class="container hero-content glass-panel">
-                <div class="glass-panel-inner" style="display: flex; gap: 4rem; align-items: center;">
-                    <div class="hero-text" style="flex: 1;">
-                        <p class="greeting text-gradient">Hello, I am</p>
-                        <h1 class="hero-title">Shreevardhann A.</h1>
-                        <h2 class="hero-subtitle">
-                            Programming | Software Development | Web Application Development | AI Tools And Automation | ECE Pre-Final Year Student At MKCE | Developer At <span class="highlight-cracoe">CRACOE</span>
-                        </h2>
-                        <div class="hero-cta">
-                            <a href="#projects" class="btn-primary">View Projects</a>
-                            <a href="http://www.linkedin.com/in/shreevardhann-a-955848348" target="_blank" class="btn-secondary">LinkedIn</a>
-                            <a href="https://github.com/shreevardhann2006" target="_blank" class="btn-secondary">GitHub</a>
-                        </div>
-                    </div>
-                    <div class="hero-image" style="flex: 1; display: flex; justify-content: center;">
-                        <div class="profile-avatar-container">
-                            <img src="profile.jpeg" alt="Shreevardhann A." class="profile-image">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="about section-padding fade-up">
-            <div class="container">
-                <h2 class="section-title"><span class="number">01.</span> About Me</h2>
-                <div class="glass-panel about-panel">
-                    <div class="glass-panel-inner">
-                        <p>I am a motivated Electronics and Communication Engineering student with a profound interest in software development and cutting-edge IT technologies.</p>
-                        <p>I focus on building scalable, efficient, and beautifully designed digital experiences. Currently, I am seeking opportunities to apply my technical skills, learn from industry leaders, and drive meaningful impact within a modern engineering team.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="skills section-padding fade-up">
-            <div class="container">
-                <h2 class="section-title"><span class="number">02.</span> Technical Arsenal</h2>
-                <div class="bento-grid">
-                    <div class="glass-panel bento-card">
-                        <div class="glass-panel-inner">
-                            <h3>Core Engineering</h3>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Java</span>
-                                <span class="skill-tag">Python</span>
-                                <span class="skill-tag">Data Structures</span>
-                                <span class="skill-tag">OOP</span>
-                                <span class="skill-tag">Algorithms</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="glass-panel bento-card bento-wide">
-                        <div class="glass-panel-inner">
-                            <h3>Web & Cloud</h3>
-                            <div class="skill-tags">
-                                <span class="skill-tag">HTML5 / CSS3</span>
-                                <span class="skill-tag">JavaScript</span>
-                                <span class="skill-tag">React (Learning)</span>
-                                <span class="skill-tag">Vercel</span>
-                                <span class="skill-tag">Tailwind CSS</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="glass-panel bento-card">
-                        <div class="glass-panel-inner">
-                            <h3>Tools & Automation</h3>
-                            <div class="skill-tags">
-                                <span class="skill-tag">Git / GitHub</span>
-                                <span class="skill-tag">AI Workflows</span>
-                                <span class="skill-tag">Prompt Engineering</span>
-                                <span class="skill-tag">VS Code</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="projects section-padding fade-up">
-            <div class="container">
-                <h2 class="section-title"><span class="number">03.</span> Featured Work</h2>
-                <div class="project-list">
-                    
-                    <div class="glass-panel project-card">
-                        <div class="glass-panel-inner project-inner">
-                            <div class="project-info">
-                                <p class="project-overline text-gradient">Web Application</p>
-                                <h3 class="project-title">Workflow Pro (Cracoe)</h3>
-                                <div class="project-description">
-                                    <p>A high-performance deployed web application tailored for streamlining digital workflows and tracking analytics. Engineered with modern web standards.</p>
-                                </div>
-                                <div class="project-links">
-                                    <a href="https://workflow-pro-cracokoe.vercel.app/" target="_blank" class="btn-secondary">View Live App</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="glass-panel project-card">
-                        <div class="glass-panel-inner project-inner">
-                            <div class="project-info">
-                                <p class="project-overline text-gradient">Mobile App / Health Tech</p>
-                                <h3 class="project-title">Eatwise</h3>
-                                <div class="project-description">
-                                    <p>A data-driven mobile application designed to help users optimize their nutrition. Built as part of a 4-person engineering team, handling application architecture and UX design.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="glass-panel project-card">
-                        <div class="glass-panel-inner project-inner">
-                            <div class="project-info">
-                                <p class="project-overline text-gradient">Embedded Systems / IoT</p>
-                                <h3 class="project-title">Wearable Health Monitor</h3>
-                                <div class="project-description">
-                                    <p>An IoT-enabled wearable device designed for tracking critical health metrics of disaster response workers in real-time. Engineered the hardware integration and data transmission protocols.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact section-padding fade-up">
-            <div class="container">
-                <div class="glass-panel contact-panel">
-                    <div class="glass-panel-inner text-center">
-                        <h2 class="section-title" style="justify-content: center;"><span class="number">04.</span> Next Steps</h2>
-                        <h3 class="contact-heading">Get In Touch</h3>
-                        <p class="contact-desc">
-                            My inbox is always open. Whether you have a question, an opportunity, or just want to say hi, I'll try my best to get back to you!
-                        </p>
-                        <div class="contact-links" style="margin-top: 2rem; display: flex; gap: 1.5rem; justify-content: center;">
-                            <a href="mailto:shreevardhann2006@gmail.com" class="btn-primary">Say Hello</a>
-                            <a href="http://www.linkedin.com/in/shreevardhann-a-955848348" target="_blank" class="btn-secondary">LinkedIn</a>
-                            <a href="https://wa.me/919543996929" target="_blank" class="btn-secondary">WhatsApp</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
-
-    <footer>
-        <div class="container">
-            <p>Designed & Built by Shreevardhann A.</p>
-        </div>
-    </footer>
 
     <script src="script.js"></script>
 </body>
