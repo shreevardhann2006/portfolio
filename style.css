@@ -44,6 +44,11 @@ body {
     position: relative;
 }
 
+/* Capitalize Starting Letters as Requested */
+h1, h2, h3, h4, h5, h6, p, a, li, span, .btn-primary, .btn-secondary {
+    text-transform: capitalize;
+}
+
 /* Preloader */
 #preloader {
     position: fixed;
@@ -113,6 +118,31 @@ body {
     top: 0;
     left: 0;
     z-index: 0;
+}
+
+.profile-avatar-container {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    padding: 10px;
+    box-shadow: 0 0 40px rgba(0, 242, 254, 0.2);
+    position: relative;
+    animation: levitate 6s ease-in-out infinite;
+}
+
+@keyframes levitate {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.profile-avatar-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 20px;
+    padding: 2px;
 }
 
 /* Project Cards */

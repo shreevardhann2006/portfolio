@@ -7,7 +7,6 @@ window.addEventListener('load', () => {
         setTimeout(() => preloader.remove(), 500);
     }
 });
-
 const cursorDot = document.querySelector('[data-cursor-dot]');
 const cursorOutline = document.querySelector('[data-cursor-outline]');
 
