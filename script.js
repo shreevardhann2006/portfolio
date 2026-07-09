@@ -42,24 +42,38 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Intersection Observer for fade-up animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px"
-};
+// Initialize AOS (Animate on Scroll)
+AOS.init({
+    duration: 800,
+    easing: 'ease-out-cubic',
+    once: true,
+    offset: 50
+});
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            // Optional: stop observing once it's visible
-            // observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
+// Initialize Typed.js for Hero Section
+const typed = new Typed('.typed-text', {
+    strings: [
+        'Programming',
+        'Software Development',
+        'AI Tools And Automation',
+        'ECE Pre-Final Year Student At MKCE',
+        'Developer At <span class="highlight-cracoe">CRACOE</span>.'
+    ],
+    typeSpeed: 50,
+    backSpeed: 30,
+    backDelay: 1500,
+    loop: true,
+    showCursor: true,
+    cursorChar: '|'
+});
 
-document.querySelectorAll('.fade-up').forEach(element => {
-    observer.observe(element);
+// Initialize Vanilla-tilt.js for 3D card hover effects
+VanillaTilt.init(document.querySelectorAll(".skill-card, .project-card, .contact-box, .hero-image"), {
+    max: 15,
+    speed: 400,
+    glare: true,
+    "max-glare": 0.2,
+    scale: 1.02
 });
 
 // Navbar blur effect on scroll
