@@ -1,10 +1,10 @@
-/* Design System & Global Styles - Nebula Glass Theme */
+/* Design System & Global Styles - Nebula Theme */
 :root {
-    /* Colors - Deep Dark Theme Default */
-    --bg-color: #050505;
-    --surface-color: rgba(20, 20, 25, 0.4);
-    --text-primary: #ffffff;
-    --text-secondary: #a1a1aa;
+    /* Colors - Dark Theme */
+    --bg-color: #0a0a0a;
+    --surface-color: rgba(255, 255, 255, 0.03);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
     --accent-color: #00f2fe;
     --accent-hover: #4facfe;
     --gradient-primary: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
@@ -18,11 +18,11 @@
     --max-width: 1200px;
     --section-padding: 6rem 2rem;
     
-    /* Effects */
-    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --glass-bg: rgba(10, 10, 15, 0.7);
-    --glass-border: 1px solid rgba(255, 255, 255, 0.08);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    /* Glassmorphism Effects */
+    --transition: all 0.3s ease;
+    --glass-bg: rgba(15, 23, 42, 0.6);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.05);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -42,6 +42,36 @@ body {
     line-height: 1.7;
     overflow-x: hidden;
     position: relative;
+    z-index: 0;
+}
+
+body.gateway-active {
+    overflow: hidden;
+}
+
+/* Background Glows */
+body::before, body::after {
+    content: '';
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(150px);
+    z-index: -2;
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+body::before {
+    background: var(--accent-color);
+    top: -100px;
+    left: -100px;
+}
+
+body::after {
+    background: #6a11cb;
+    bottom: -100px;
+    right: -100px;
 }
 
 /* Capitalize Starting Letters as Requested */
@@ -112,7 +142,7 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .btn-primary, .btn-secondary {
 
 /* Particles Container */
 #particles-js {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
@@ -120,106 +150,11 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, .btn-primary, .btn-secondary {
     z-index: 0;
 }
 
-.profile-avatar-container {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: var(--glass-bg);
-    border: var(--glass-border);
-    padding: 10px;
-    box-shadow: 0 0 40px rgba(0, 242, 254, 0.2);
-    position: relative;
-    animation: levitate 6s ease-in-out infinite;
-}
 
-@keyframes levitate {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-}
 
-.profile-avatar-container::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    border-radius: 20px;
-    padding: 2px;
-}
 
-/* Project Cards */
-.project-card {
-    background: var(--glass-bg);
-    border: var(--glass-border);
-    border-radius: 20px;
-    overflow: hidden;
-    transition: var(--transition);
-    position: relative;
-}
 
-.project-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    border-radius: 20px;
-    padding: 2px;
-    background: var(--gradient-primary);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
 
-.project-card:hover::before {
-    opacity: 1;
-}
-
-.project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 242, 254, 0.15);
-}
-
-/* Animated Mesh Gradient Background */
-body::before {
-    content: '';
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at 50% 50%, rgba(79, 172, 254, 0.05), transparent 60%),
-                radial-gradient(circle at 80% 20%, rgba(0, 242, 254, 0.05), transparent 40%);
-    z-index: -1;
-    animation: rotate 60s linear infinite;
-    pointer-events: none;
-}
-
-/* Glassmorphism Floating Orbs */
-body::after {
-    content: '';
-    position: fixed;
-    width: 300px;
-    height: 300px;
-    background: var(--gradient-primary);
-    filter: blur(100px);
-    border-radius: 50%;
-    top: 20%;
-    left: 10%;
-    z-index: -1;
-    animation: float 20s ease-in-out infinite alternate;
-    opacity: 0.3;
-    pointer-events: none;
-}
-
-@keyframes float {
-    0% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(30vw, 20vh) scale(1.2); }
-    100% { transform: translate(-10vw, 40vh) scale(0.9); }
-}
-
-@keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
 
 /* Typography Utilities */
 h1, h2, h3, h4, h5, h6 {
@@ -255,39 +190,136 @@ a {
     background: var(--gradient-primary);
     color: #000;
     border-radius: 50px;
-    font-weight: 600;
+    font-weight: 700;
     position: relative;
-    overflow: hidden;
-    z-index: 1;
     border: none;
     cursor: pointer;
-    box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
-}
-
-.btn-primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    z-index: -1;
+    box-shadow: 0 0 15px var(--gradient-glow);
     transition: var(--transition);
 }
 
 .btn-primary:hover {
-    box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
+    box-shadow: 0 0 25px var(--accent-hover);
     transform: translateY(-2px);
-}
-
-.btn-primary:hover::before {
-    left: 100%;
-    transition: 0.5s ease;
+    color: #000;
 }
 
 .btn-secondary {
-    /* Placeholder for secondary button style */
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    border-radius: 50px;
+    font-weight: 600;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+/* Pill Buttons for Hero CTA */
+.btn-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-pill.solid {
+    background: #fff;
+    color: #000;
+    border: 1px solid #fff;
+}
+
+.btn-pill.solid:hover {
+    background: #e6e6e6;
+    border-color: #e6e6e6;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+.btn-pill.outline {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-pill.outline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Choose Again Back Button */
+.choose-again-btn {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.choose-again-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-3px);
+}
+
+.choose-again-btn i {
+    font-size: 1rem;
+}
+
+/* Hero Socials */
+.hero-socials {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: 1.8rem;
+}
+
+.hero-socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    font-size: 1.35rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: all 0.3s ease;
+}
+
+.hero-socials a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
 }
 
 /* Navbar */
@@ -296,11 +328,16 @@ header {
     top: 0;
     width: 100%;
     z-index: 1000;
+    background: transparent;
+    transition: var(--transition);
+}
+
+.scrolled-header {
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: var(--glass-border);
-    transition: var(--transition);
+    box-shadow: var(--glass-shadow);
 }
 
 .nav-content {
@@ -353,10 +390,11 @@ header {
 footer {
     text-align: center;
     padding: 3rem 0;
-    border-top: var(--glass-border);
     margin-top: 4rem;
+    border-top: var(--glass-border);
     color: var(--text-secondary);
-    background: var(--glass-bg);
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
 }
 
 /* Navbar active link state */
@@ -392,4 +430,74 @@ body, a, button, .btn-primary, .btn-secondary {
     height: 40px;
     border: 2px solid var(--accent-hover);
     transition: width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out;
+}
+
+/* ============================================
+   LIGHT TRAILS ANIMATION (Futuristic Theme)
+   ============================================ */
+#light-trails {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.light-trail {
+    position: absolute;
+    width: 180px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-color), #fff);
+    border-radius: 50%;
+    box-shadow: 0 0 20px var(--accent-color), 0 0 40px rgba(0, 242, 254, 0.3);
+    animation: shootAcross linear infinite;
+    opacity: 0;
+}
+
+.light-trail.purple {
+    background: linear-gradient(90deg, transparent, #9d00ff, #fff);
+    box-shadow: 0 0 20px #9d00ff, 0 0 40px rgba(157, 0, 255, 0.3);
+}
+
+@keyframes shootAcross {
+    0%   { transform: translateX(-100vw) scaleX(0.5); opacity: 0; }
+    8%   { opacity: 1; }
+    92%  { opacity: 1; }
+    100% { transform: translateX(110vw) scaleX(1.2); opacity: 0; }
+}
+
+/* ============================================
+   HERO ENTRANCE ANIMATIONS (Futuristic Theme)
+   ============================================ */
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero .greeting {
+    animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.1s;
+}
+
+.hero .hero-title {
+    animation: slideUpFade 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.25s;
+}
+
+.hero .hero-subtitle {
+    animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.4s;
+}
+
+.hero .hero-cta {
+    animation: slideUpFade 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.55s;
+}
+
+.hero .hero-image {
+    animation: slideUpFade 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.3s;
 }
