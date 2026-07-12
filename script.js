@@ -25,6 +25,14 @@ window.enterPortfolio = function(type) {
     }, 500);
 };
 
+window.showGateway = function() {
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.5s ease';
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 500);
+};
+
 // ---- HERO NAME — Letter Split Animation ----
 (function splitHeroName() {
     const nameEl = document.getElementById('hero-name');
