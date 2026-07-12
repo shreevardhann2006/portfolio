@@ -8,6 +8,23 @@ window.addEventListener('load', () => {
     }
 });
 
+// Gateway Navigation Function
+window.enterPortfolio = function(type) {
+    const gateway = document.getElementById('pathway-gateway');
+    if (gateway) {
+        gateway.style.opacity = '0';
+        gateway.style.transition = 'opacity 0.5s ease';
+    }
+    
+    setTimeout(() => {
+        if (type === 'recruiter') {
+            window.location.href = 'recruiter.html';
+        } else if (type === 'visitor') {
+            window.location.href = 'visitor.html';
+        }
+    }, 500);
+};
+
 // ---- HERO NAME — Letter Split Animation ----
 (function splitHeroName() {
     const nameEl = document.getElementById('hero-name');
