@@ -1160,3 +1160,145 @@
         padding: 2rem;
     }
 }
+
+/* ============================================
+   VISITOR PAGE — Photo Animation
+   ============================================ */
+
+.visitor-photo-frame {
+    position: relative;
+    width: 340px;
+    height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Blobs */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(50px);
+    opacity: 0.55;
+    animation: blobFloat 6s ease-in-out infinite;
+}
+.blob-1 {
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, #a855f7, #6366f1);
+    top: -30px; left: -40px;
+    animation-delay: 0s;
+}
+.blob-2 {
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, #22d3ee, #3b82f6);
+    bottom: 10px; right: -30px;
+    animation-delay: -2s;
+}
+.blob-3 {
+    width: 140px; height: 140px;
+    background: radial-gradient(circle, #f472b6, #fb923c);
+    bottom: -20px; left: 10px;
+    animation-delay: -4s;
+}
+
+@keyframes blobFloat {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50%       { transform: translateY(-18px) scale(1.06); }
+}
+
+/* Photo card */
+.visitor-card {
+    position: relative;
+    width: 260px;
+    height: 340px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 3px rgba(168, 85, 247, 0.3),
+        0 20px 60px rgba(0,0,0,0.5),
+        0 0 80px rgba(168, 85, 247, 0.2);
+    animation: cardBreathe 4s ease-in-out infinite;
+    z-index: 2;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.visitor-card:hover {
+    transform: scale(1.04) rotate(-1deg);
+    box-shadow:
+        0 0 0 3px rgba(168, 85, 247, 0.6),
+        0 30px 80px rgba(0,0,0,0.6),
+        0 0 120px rgba(168, 85, 247, 0.4);
+}
+
+@keyframes cardBreathe {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33%       { transform: translateY(-10px) rotate(1deg); }
+    66%       { transform: translateY(-5px) rotate(-0.5deg); }
+}
+
+.visitor-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.visitor-card:hover .visitor-card-img {
+    transform: scale(1.06);
+}
+
+/* Shimmer overlay */
+.visitor-card-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        transparent 40%,
+        rgba(255,255,255,0.12) 50%,
+        transparent 60%
+    );
+    background-size: 200% 200%;
+    animation: shimmerMove 3s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes shimmerMove {
+    0%   { background-position: 200% 200%; }
+    100% { background-position: -100% -100%; }
+}
+
+/* Floating badges */
+.float-badge {
+    position: absolute;
+    background: rgba(15, 15, 30, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    color: #e2e8f0;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    white-space: nowrap;
+    z-index: 3;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.badge-top {
+    top: 20px;
+    right: -10px;
+    animation: badgeFloat 3.5s ease-in-out infinite;
+}
+
+.badge-bot {
+    bottom: 30px;
+    left: -10px;
+    animation: badgeFloat 3.5s ease-in-out infinite reverse;
+}
+
+@keyframes badgeFloat {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-8px); }
+}
+
