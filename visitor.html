@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of a Full Stack Developer">
+    <title>Portfolio | Full Stack Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@400;600;700;800&family=Cinzel+Decorative:wght@700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sections.css">
+</head>
+
+<body class="dark-theme">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <span class="loader-text">Loading</span>
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Back to Gateway Button -->
+    <button class="choose-again-btn" onclick="showGateway()">
+        <i class="fa-solid fa-arrow-left"></i> Choose again
+    </button>
+
+    <!-- Gateway Overlay (Starting Page) -->
+    <div id="pathway-gateway" class="pathway-section hidden">
+        <div class="container text-center">
+            <span class="pathway-subtitle">SHREEVARDHANN A.</span>
+            <h2 class="pathway-title">Choose how you'd like to know me.</h2>
+            
+            <div class="pathway-cards">
+                <!-- Recruiter Card -->
+                <div class="pathway-card" onclick="enterPortfolio('recruiter')">
+                    <div class="card-glow glow-cyan"></div>
+                    <h3 class="serif-title">Are you a recruiter?</h3>
+                    <p>Projects, experience, and the work I love building.</p>
+                    <div class="circle-btn"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+
+                <!-- Visitor Card -->
+                <div class="pathway-card" onclick="enterPortfolio('visitor')">
+                    <div class="card-glow glow-green"></div>
+                    <h3 class="serif-title">Are you a curious<br>visitor or a potential<br>teammate?</h3>
+                    <p>Stories, memories, and the person behind the code.</p>
+                    <div class="circle-btn"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Light Trails Animation (from futuristic theme) -->
+    <div id="light-trails"></div>
+
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+    <header id="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo"><span class="highlight">Portfolio</span></a>
+            <nav class="nav-links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#resume">Resume</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact" class="btn-primary">Let's Talk</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero section-padding">
+            <div class="container hero-content">
+
+                <!-- Left: Text Content -->
+                <div class="hero-text">
+                    <p class="greeting">Hi, my name is</p>
+                    <h1 class="hero-title hero-name" id="hero-name">Shreevardhann A.</h1>
+                    <h2 class="hero-subtitle"><span class="typed-text"></span></h2>
+
+                    <div class="hero-socials">
+                        <a href="https://www.linkedin.com/in/shreevardhann-a-955848348" target="_blank"
+                            aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://www.hackerrank.com/profile/shreevardhann201" target="_blank"
+                            aria-label="HackerRank"><i class="fa-brands fa-hackerrank"></i></a>
+                        <a href="https://leetcode.com/u/shreevardhann2006/" target="_blank" aria-label="LeetCode"><i
+                                class="fa-solid fa-code"></i></a>
+                    </div>
+                </div>
+
+                <!-- Right: Profile Image -->
+                <div class="hero-image">
+                    <div class="image-wrapper">
+                        <!-- Orbit rings with glowing dots -->
+                        <div class="orbit-ring orbit-ring-1"></div>
+                        <div class="orbit-ring orbit-ring-2"></div>
+                        <div class="profile-avatar-container">
+                            <img src="profile.jpeg" alt="Shreevardhann A" class="profile-image">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+
+        <!-- About Section -->
+        <section id="about" class="about section-padding" data-aos="fade-up">
+            <div class="container">
+                <h2 class="section-title">01. <span class="highlight">About Me</span></h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Motivated Electronics and Communication Engineering student with a strong interest in
+                            software and IT-related technologies.</p>
+                        <br>
+                        <p>Seeking an opportunity to learn, apply technical skills, and grow professionally while
+                            contributing positively to the organization.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact section-padding" data-aos="fade-up">
+            <div class="container text-center">
+                <h2 class="section-title">05. <span class="highlight">What's Next?</span></h2>
+                <h3 class="contact-heading">Get In Touch</h3>
+                <p class="contact-desc">
+                    Looking for a motivated and skilled developer? I'm ready to contribute, learn, and grow with your
+                    organization. Let's connect and discuss opportunities.
+                </p>
+                <div class="contact-links"
+                    style="margin-top: 2rem; display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+                    <a href="mailto:shreevardhann2006@gmail.com" class="btn-primary">Email Me</a>
+                    <a href="https://www.linkedin.com/in/shreevardhann-a-955848348" target="_blank"
+                        class="btn-primary">LinkedIn</a>
+                    <!-- WhatsApp Link -->
+                    <a href="https://wa.me/919543996929" target="_blank" class="btn-primary">WhatsApp</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Shreevardhann A. Built with Vanilla Web Tech.</p>
+        </div>
+    </footer>
+
+    <!-- CDNs for Animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
