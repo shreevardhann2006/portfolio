@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of Shreevardhann A. — Full Stack Developer">
-    <title>Shreevardhann A. | Portfolio</title>
+    <meta name="description" content="Portfolio of Shreevardhann A. — Software Developer">
+    <title>Shreevardhann A. | Software Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@400;600;700;800&family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet">
@@ -416,11 +416,7 @@
 
         /* Tag line at top */
         .gw-topbar {
-            position: fixed;
-            top: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 0.75rem;
             background: rgba(255,255,255,0.04);
@@ -428,6 +424,7 @@
             border-radius: 999px;
             padding: 0.45rem 1.2rem;
             font-size: 0.78rem;
+            margin-bottom: 2rem;
             color: rgba(255,255,255,0.4);
             z-index: 20;
             opacity: 0;
@@ -480,21 +477,21 @@
         </svg>
     </div>
 
-    <!-- Top status bar -->
-    <div class="gw-topbar">
-        <span class="dot"></span>
-        Available for opportunities
-    </div>
-
     <!-- Main content -->
     <div class="gateway">
+        <!-- Top status bar -->
+        <div class="gw-topbar">
+            <span class="dot"></span>
+            Available for opportunities
+        </div>
+
         <p class="gw-eyebrow">Welcome to my universe</p>
 
         <h1 class="gw-name" data-text="Shreevardhann A.">
             <span class="word-1">Shreevardhann</span>&nbsp;<span class="word-2">A.</span>
         </h1>
 
-        <p class="gw-role">Full Stack Developer &nbsp;·&nbsp; Electronics Engineer</p>
+        <p class="gw-role">Software Developer &nbsp;·&nbsp; Electronics Engineer</p>
         <div class="gw-divider"></div>
 
         <p class="gw-question">Who are you visiting as?</p>
@@ -519,8 +516,6 @@
             </div>
         </div>
     </div>
-
-    <div class="gw-scroll-hint">Scroll to explore</div>
 
     <script>
         // ---- Cursor ----
