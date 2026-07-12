@@ -26,13 +26,9 @@ window.enterPortfolio = function(type) {
 };
 
 window.showGateway = function() {
-    const gateway = document.getElementById('pathway-gateway');
-    if (gateway) {
-        gateway.classList.remove('hidden');
-        gateway.style.opacity = '1';
-        gateway.style.visibility = 'visible';
-        gateway.style.pointerEvents = 'auto';
-    }
+    document.body.style.transition = 'opacity 0.4s ease';
+    document.body.style.opacity = '0';
+    setTimeout(() => { window.location.href = 'index.html'; }, 400);
 };
 
 // ---- HERO NAME — Letter Split Animation ----
