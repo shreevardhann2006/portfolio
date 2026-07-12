@@ -7,6 +7,71 @@ window.addEventListener('load', () => {
         setTimeout(() => preloader.remove(), 500);
     }
 });
+
+// ---- HERO NAME — Letter Split Animation ----
+(function splitHeroName() {
+    const nameEl = document.getElementById('hero-name');
+    if (!nameEl) return;
+
+    const text = nameEl.textContent;
+    nameEl.textContent = '';
+
+    text.split('').forEach((char, i) => {
+        const span = document.createElement('span');
+        span.className = 'letter' + (char === ' ' ? ' space' : '');
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        // Stagger each letter by 60ms, starting after a 400ms base delay
+        span.style.animationDelay = (0.4 + i * 0.06) + 's';
+        nameEl.appendChild(span);
+    });
+})();
+
+
+
+// ---- SKILLS TICKER — pure CSS animation, no JS needed ----
+
+// ---- LIGHT TRAILS (Futuristic Neon Streaks) ----
+(function initLightTrails() {
+    const container = document.getElementById('light-trails');
+    if (!container) return;
+
+    function createTrail() {
+        const trail = document.createElement('div');
+        trail.className = 'light-trail';
+
+        // Random vertical position across the full viewport
+        trail.style.top = Math.random() * 100 + 'vh';
+
+        // Speed: between 1.2s and 3.5s
+        const duration = (Math.random() * 2.3 + 1.2).toFixed(2);
+        trail.style.animationDuration = duration + 's';
+
+        // Small delay spread so they don't all fire at once
+        trail.style.animationDelay = (Math.random() * 2).toFixed(2) + 's';
+
+        // Width varies slightly for depth feel
+        const width = Math.floor(Math.random() * 120 + 100);
+        trail.style.width = width + 'px';
+
+        // ~40% chance of purple variant
+        if (Math.random() > 0.6) {
+            trail.classList.add('purple');
+        }
+
+        container.appendChild(trail);
+
+        // Remove after max possible animation time
+        setTimeout(() => trail.remove(), (parseFloat(duration) + 2.5) * 1000);
+    }
+
+    // Seed with initial trails
+    for (let i = 0; i < 6; i++) createTrail();
+
+    // Keep spawning
+    setInterval(createTrail, 700);
+})();
+
+
 const cursorDot = document.querySelector('[data-cursor-dot]');
 const cursorOutline = document.querySelector('[data-cursor-outline]');
 
@@ -42,12 +107,12 @@ interactives.forEach(el => {
 // 2. Typing Effect for Hero Subtitle
 const typed = new Typed('.typed-text', {
     strings: [
-        'Programming',
-        'Software Development',
-        'Web Application Development',
+        'Programmer',
+        'Software Developer',
+        'Web Application Developer',
         'AI Tools and Automation',
         'ECE pre-final year student at MKCE',
-        'developer at cracoe.'
+        'CTO at Cracoe'
     ],
     typeSpeed: 50,
     backSpeed: 30,
@@ -55,8 +120,8 @@ const typed = new Typed('.typed-text', {
     backDelay: 1500
 });
 
-// 3. 3D Tilt Effect on Cards
-VanillaTilt.init(document.querySelectorAll('.skill-card, .project-card, .about-content'), {
+// 3. 3D Tilt Effect on Skill Cards
+VanillaTilt.init(document.querySelectorAll('.skill-card, .about-content'), {
     max: 10,
     speed: 400,
     glare: true,
@@ -68,11 +133,9 @@ VanillaTilt.init(document.querySelectorAll('.skill-card, .project-card, .about-c
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
-        navbar.style.background = 'rgba(10, 10, 15, 0.95)';
-        navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.5)';
+        navbar.classList.add('scrolled-header');
     } else {
-        navbar.style.background = 'var(--glass-bg)';
-        navbar.style.boxShadow = 'none';
+        navbar.classList.remove('scrolled-header');
     }
 });
 
@@ -150,3 +213,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// ---- BENTO FLIP CARDS — mobile tap to flip ----
+(function initBentoFlip() {
+    // On touch devices, hover doesn't fire — toggle .flipped on tap instead
+    const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
+
+    document.querySelectorAll('.bento-card').forEach(card => {
+        card.addEventListener('click', () => {
+            if (!isTouchDevice()) return; // Desktop: CSS hover handles it
+            card.classList.toggle('flipped');
+        });
+
+        // Also support keyboard (Enter / Space) for accessibility
+        card.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                card.classList.toggle('flipped');
+            }
+        });
+    });
+})();
+
+// ---- GATEWAY SECTION LOGIC ----
+function showGateway() {
+    const gateway = document.getElementById('pathway-gateway');
+    if (gateway) {
+        gateway.classList.remove('hidden');
+        document.body.classList.add('gateway-active');
+    } else {
+        window.location.href = 'index.html';
+    }
+}
+
+function enterPortfolio(path) {
+    const gateway = document.getElementById('pathway-gateway');
+    const currentPage = window.location.pathname.split('/').pop();
+    
+    // If we are already on the target page (or it's local file testing), just hide the overlay
+    if ((path === 'recruiter' && (currentPage === 'recruiter.html' || currentPage === '')) || 
+        (path === 'visitor' && currentPage === 'visitor.html')) {
+        if (gateway) {
+            gateway.classList.add('hidden');
+            document.body.classList.remove('gateway-active');
+        }
+    } else {
+        window.location.href = path + '.html';
+    }
+}
