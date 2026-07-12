@@ -265,7 +265,7 @@ a {
 /* Choose Again Back Button */
 .choose-again-btn {
     position: fixed;
-    top: 2rem;
+    bottom: 2rem;
     left: 2rem;
     z-index: 2000;
     display: flex;
