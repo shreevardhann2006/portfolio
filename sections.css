@@ -1526,3 +1526,173 @@
     z-index: -1;
 }
 
+/* =============================================
+   12. Secret Door & Memory Wall
+   ============================================= */
+
+/* Secret Door */
+.secret-door {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    animation: floatDoor 4s ease-in-out infinite;
+}
+
+@keyframes floatDoor {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.door-icon {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    position: absolute;
+}
+
+.door-hover-icon {
+    color: var(--cyan);
+    font-size: 1.5rem;
+    position: absolute;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.door-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--cyan) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease, width 0.4s ease, height 0.4s ease;
+    z-index: -1;
+}
+
+.door-tooltip {
+    position: absolute;
+    right: 80px;
+    background: rgba(15, 23, 42, 0.8);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.secret-door:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+}
+
+.secret-door:hover .door-icon {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+.secret-door:hover .door-hover-icon {
+    opacity: 1;
+    transform: scale(1);
+    text-shadow: 0 0 10px var(--cyan);
+}
+
+.secret-door:hover .door-glow {
+    opacity: 0.4;
+    width: 150%;
+    height: 150%;
+}
+
+.secret-door:hover .door-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* Memory Wall Gallery */
+.memory-desc {
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.memory-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.memory-item {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    cursor: pointer;
+}
+
+.memory-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    filter: brightness(0.8);
+}
+
+.memory-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0) 60%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.memory-overlay h3 {
+    color: #fff;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-family: var(--font-heading);
+}
+
+.memory-overlay p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.memory-item:hover img {
+    transform: scale(1.05);
+    filter: brightness(1);
+}
+
+.memory-item:hover .memory-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
