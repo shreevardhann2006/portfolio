@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of a Full Stack Developer">
+    <title>Portfolio | Full Stack Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@400;600;700;800&family=Cinzel+Decorative:wght@700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sections.css">
+</head>
+
+<body class="dark-theme">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <span class="loader-text">Loading</span>
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <!-- Back to Gateway Button -->
+    <button class="choose-again-btn" onclick="showGateway()">
+        <i class="fa-solid fa-arrow-left"></i> Choose again
+    </button>
+
+    <!-- Gateway Overlay (Starting Page) -->
+    <div id="pathway-gateway" class="pathway-section hidden">
+        <div class="container text-center">
+            <span class="pathway-subtitle">SHREEVARDHANN A.</span>
+            <h2 class="pathway-title">Choose how you'd like to know me.</h2>
+            
+            <div class="pathway-cards">
+                <!-- Recruiter Card -->
+                <div class="pathway-card" onclick="enterPortfolio('recruiter')">
+                    <div class="card-glow glow-cyan"></div>
+                    <h3 class="serif-title">Are you a recruiter?</h3>
+                    <p>Projects, experience, and the work I love building.</p>
+                    <div class="circle-btn"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+
+                <!-- Visitor Card -->
+                <div class="pathway-card" onclick="enterPortfolio('visitor')">
+                    <div class="card-glow glow-green"></div>
+                    <h3 class="serif-title">Are you a curious<br>visitor or a potential<br>teammate?</h3>
+                    <p>Stories, memories, and the person behind the code.</p>
+                    <div class="circle-btn"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Light Trails Animation (from futuristic theme) -->
+    <div id="light-trails"></div>
+
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+    <header id="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo"><span class="highlight">Portfolio</span></a>
+            <nav class="nav-links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#resume">Resume</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact" class="btn-primary">Let's Talk</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero section-padding">
+            <div class="container hero-content">
+
+                <!-- Left: Text Content -->
+                <div class="hero-text">
+                    <p class="greeting">Hi, my name is</p>
+                    <h1 class="hero-title hero-name" id="hero-name">Shreevardhann A.</h1>
+                    <h2 class="hero-subtitle"><span class="typed-text"></span></h2>
+
+                    <div class="hero-socials">
+                        <a href="https://www.linkedin.com/in/shreevardhann-a-955848348" target="_blank"
+                            aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://www.hackerrank.com/profile/shreevardhann201" target="_blank"
+                            aria-label="HackerRank"><i class="fa-brands fa-hackerrank"></i></a>
+                        <a href="https://leetcode.com/u/shreevardhann2006/" target="_blank" aria-label="LeetCode"><i
+                                class="fa-solid fa-code"></i></a>
+                    </div>
+                </div>
+
+                <!-- Right: Profile Image -->
+                <div class="hero-image">
+                    <div class="image-wrapper">
+                        <!-- Orbit rings with glowing dots -->
+                        <div class="orbit-ring orbit-ring-1"></div>
+                        <div class="orbit-ring orbit-ring-2"></div>
+                        <div class="profile-avatar-container">
+                            <img src="profile.jpeg" alt="Shreevardhann A" class="profile-image">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+
+
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills section-padding" data-aos="fade-up">
+            <div class="container">
+                <h2 class="section-title">02. <span class="highlight">My Skills</span></h2>
+            </div>
+
+            <!-- ── Technical Skills label ── -->
+            <div class="skills-group-label container">
+                <span class="group-line"></span>
+                <span class="group-tag technical">⚡ Technical Skills</span>
+                <span class="group-line"></span>
+            </div>
+
+            <!-- Row 1 — scrolls LEFT -->
+            <div class="ticker-row">
+                <div class="ticker-track" style="animation-duration:30s; animation-direction: normal;">
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="devicon-java-plain colored"></i></div><span>Java</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="devicon-python-plain colored"></i></div><span>Python</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="devicon-html5-plain colored"></i></div><span>HTML5</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="devicon-github-original" style="color:#e6edf3"></i></div>
+                        <span>GitHub</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="fa-solid fa-cubes" style="color:#4facfe"></i></div>
+                        <span>OOP</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="fa-solid fa-diagram-project" style="color:#9d00ff"></i></div>
+                        <span>Data Structures</span>
+                    </div>
+                    <!-- duplicate -->
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="devicon-java-plain colored"></i></div><span>Java</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="devicon-python-plain colored"></i></div><span>Python</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="devicon-html5-plain colored"></i></div><span>HTML5</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="devicon-github-original" style="color:#e6edf3"></i></div>
+                        <span>GitHub</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="fa-solid fa-cubes" style="color:#4facfe"></i></div>
+                        <span>OOP</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="fa-solid fa-diagram-project" style="color:#9d00ff"></i></div>
+                        <span>Data Structures</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2 — scrolls RIGHT -->
+            <div class="ticker-row">
+                <div class="ticker-track" style="animation-duration:38s; animation-direction: reverse;">
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="devicon-windows8-original colored"></i></div><span>Windows
+                            OS</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="fa-solid fa-microchip" style="color:#00f2fe"></i></div>
+                        <span>AI Tools</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="fa-solid fa-file-excel" style="color:#217346"></i></div>
+                        <span>MS Excel</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="devicon-java-plain colored"></i></div><span>Java</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="devicon-python-plain colored"></i></div><span>Python</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="devicon-html5-plain colored"></i></div><span>HTML5</span>
+                    </div>
+                    <!-- duplicate -->
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="devicon-windows8-original colored"></i></div><span>Windows
+                            OS</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="fa-solid fa-microchip" style="color:#00f2fe"></i></div>
+                        <span>AI Tools</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="fa-solid fa-file-excel" style="color:#217346"></i></div>
+                        <span>MS Excel</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="devicon-java-plain colored"></i></div><span>Java</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="devicon-python-plain colored"></i></div><span>Python</span>
+                    </div>
+                    <div class="ticker-badge">
+                        <div class="ticker-icon"><i class="devicon-html5-plain colored"></i></div><span>HTML5</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── Soft Skills label ── -->
+            <div class="skills-group-label container" style="margin-top: 2.5rem;">
+                <span class="group-line soft"></span>
+                <span class="group-tag soft">🤝 Soft Skills</span>
+                <span class="group-line soft"></span>
+            </div>
+
+            <!-- Soft Skills — floating cards -->
+            <div class="soft-skills-float container">
+                <div class="soft-card" style="--i:0">
+                    <div class="soft-icon-wrap"><i class="fa-solid fa-comments"></i></div>
+                    <span>Communication</span>
+                </div>
+                <div class="soft-card" style="--i:1">
+                    <div class="soft-icon-wrap"><i class="fa-solid fa-people-group"></i></div>
+                    <span>Teamwork</span>
+                </div>
+                <div class="soft-card" style="--i:2">
+                    <div class="soft-icon-wrap"><i class="fa-solid fa-bolt"></i></div>
+                    <span>Quick Learner</span>
+                </div>
+                <div class="soft-card" style="--i:3">
+                    <div class="soft-icon-wrap"><i class="fa-solid fa-puzzle-piece"></i></div>
+                    <span>Problem Solving</span>
+                </div>
+                <div class="soft-card" style="--i:4">
+                    <div class="soft-icon-wrap"><i class="fa-solid fa-clock"></i></div>
+                    <span>Time Management</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Experience & Education Section -->
+        <section id="resume" class="resume section-padding" data-aos="fade-up">
+            <div class="container">
+                <h2 class="section-title">03. <span class="highlight">Experience & Education</span></h2>
+
+                <div class="timeline">
+                    <!-- Cracoe CTO -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">Present</span>
+                            <h3>CTO <span>@ Cracoe</span></h3>
+                            <p><strong>Contributions:</strong></p>
+                            <ul class="timeline-list">
+                                <li>Developed and maintained software solutions.</li>
+                                <li>Built WorkTracker, my first project for the company.</li>
+                                <li>Served as a trainer in a 15-day Web Development Internship Program.</li>
+                                <li>Conducted training sessions on MongoDB.</li>
+                                <li>Created technical posters, educational content, and social media materials for company branding.</li>
+                                <li>Collaborated with team members across development, training, and marketing initiatives.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- College -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2024 - 2028</span>
+                            <h3>B.E. Electronics & Communication <span>@ M. Kumarasamy College</span></h3>
+                            <p>CGPA: 7.0+ (up to 3rd Semester). Student Ambassador for Prathiyogitha Event. Office
+                                Bearer at IETE.</p>
+                        </div>
+                    </div>
+
+                    <!-- Virtual Internships -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">Virtual Internships</span>
+                            <h3>Simulations <span>@ Various</span></h3>
+                            <p>Completed job simulations in Technology, GenAI Powered Data Analytics, Software
+                                Engineering, and YUVA AI. Achieved 88% in German and secured 2nd prize in Paper
+                                Presentation.</p>
+                        </div>
+                    </div>
+
+                    <!-- Schooling -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2021 - 2024</span>
+                            <h3>High School <span>@ Sri Vidya Mandir & Heritage Vidhyalaya</span></h3>
+                            <p>Higher Secondary Course (64%) and Secondary School Leaving Certificate (81%).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects section-padding" data-aos="fade-up">
+            <div class="container">
+                <h2 class="section-title">04. <span class="highlight">Some Things I've Built</span></h2>
+
+                <div class="bento-grid">
+
+                    <!-- Card 1: Wide — Workflow Pro -->
+                    <div class="bento-card wide accent-cyan" tabindex="0">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="bento-num">01</div>
+                                <div class="bento-category">Web Application</div>
+                                <h3 class="bento-name">Workflow Pro <em>Cracoe</em></h3>
+                                <span class="bento-hint">Hover to explore →</span>
+                            </div>
+                            <div class="flip-back">
+                                <span class="back-tag">Web Application</span>
+                                <h3>Workflow Pro <span>(Cracoe)</span></h3>
+                                <p>A fully deployed web application built for real-world use. Core product platform for
+                                    the Cracoe organisation.</p>
+                                <a href="https://workflow-pro-cracokoe.vercel.app/" target="_blank"
+                                    class="btn-primary">View Live ↗</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Regular — Clap Switch -->
+                    <div class="bento-card accent-purple" tabindex="0">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="bento-num">02</div>
+                                <div class="bento-category">Electronics & Communication</div>
+                                <h3 class="bento-name">Clap Switch <em>Circuit</em></h3>
+                                <span class="bento-hint">Hover to explore →</span>
+                            </div>
+                            <div class="flip-back">
+                                <span class="back-tag">Electronics</span>
+                                <h3>Clap Switch <span>Circuit</span></h3>
+                                <p>Designed a clap-activated switch circuit to control electrical devices using sound
+                                    signals. Team of 4.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Regular — Eatwise -->
+                    <div class="bento-card accent-green" tabindex="0">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="bento-num">03</div>
+                                <div class="bento-category">Mobile App · Health</div>
+                                <h3 class="bento-name">Eat<em>wise</em></h3>
+                                <span class="bento-hint">Hover to explore →</span>
+                            </div>
+                            <div class="flip-back">
+                                <span class="back-tag">Mobile App</span>
+                                <h3>Eat<span>wise</span></h3>
+                                <p>Mobile app helping users make healthier food choices using nutrition data. App
+                                    Developer & Designer in a team of 4.</p>
+                                <img src="eatwise-preview.png" alt="Eatwise App" style="width: 100%; height: 100px; object-fit: cover; object-position: center; border-radius: 8px; margin-top: 0.5rem; border: 1px solid rgba(255,255,255,0.15); box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Wide — IoT -->
+                    <div class="bento-card wide accent-orange" tabindex="0">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="bento-num">04</div>
+                                <div class="bento-category">IoT · Embedded · Healthcare</div>
+                                <h3 class="bento-name">Wearable IoT <em>Health Monitor</em></h3>
+                                <span class="bento-hint">Hover to explore →</span>
+                            </div>
+                            <div class="flip-back">
+                                <span class="back-tag">IoT / Healthcare</span>
+                                <h3>Wearable IoT <span>Health Monitor</span></h3>
+                                <p>Wearable device tracking health data of disaster response workers using IoT
+                                    technology. IoT System Developer in a team of 4.</p>
+                                <a href="https://live-monitoring-command-center-for.vercel.app/" target="_blank"
+                                    class="btn-primary">View Live ↗</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: Wide — Train Reservation -->
+                    <div class="bento-card wide accent-pink" tabindex="0">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="bento-num">05</div>
+                                <div class="bento-category">Web App · UI/UX</div>
+                                <h3 class="bento-name">Futuristic <em>Train Reservation</em></h3>
+                                <span class="bento-hint">Hover to explore →</span>
+                            </div>
+                            <div class="flip-back">
+                                <span class="back-tag">Web App</span>
+                                <h3>Train <span>Reservation</span></h3>
+                                <p>A modern, next-generation web application for booking train tickets with a stunning futuristic interface and seamless user experience.</p>
+                                <a href="https://futuristic-train-reservation.vercel.app/" target="_blank"
+                                    class="btn-primary">View Live ↗</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 6: Regular — Locate Anything -->
+                    <div class="bento-card accent-cyan" tabindex="0">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <div class="bento-num">06</div>
+                                <div class="bento-category">Web App · Utility</div>
+                                <h3 class="bento-name">Locate <em>Anything</em></h3>
+                                <span class="bento-hint">Hover to explore →</span>
+                            </div>
+                            <div class="flip-back">
+                                <span class="back-tag">Web App</span>
+                                <h3>Locate <span>Anything</span></h3>
+                                <p>A versatile web application designed to help users search, track, and locate various items or places seamlessly.</p>
+                                <a href="https://locate-anything-8we9cl4lz-shreevardhann2006s-projects.vercel.app/" target="_blank"
+                                    class="btn-primary">View Live ↗</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact section-padding" data-aos="fade-up">
+            <div class="container text-center">
+                <h2 class="section-title">05. <span class="highlight">What's Next?</span></h2>
+                <h3 class="contact-heading">Get In Touch</h3>
+                <p class="contact-desc">
+                    Looking for a motivated and skilled developer? I'm ready to contribute, learn, and grow with your
+                    organization. Let's connect and discuss opportunities.
+                </p>
+                <div class="contact-links"
+                    style="margin-top: 2rem; display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+                    <a href="mailto:shreevardhann2006@gmail.com" class="btn-primary">Email Me</a>
+                    <a href="https://www.linkedin.com/in/shreevardhann-a-955848348" target="_blank"
+                        class="btn-primary">LinkedIn</a>
+                    <!-- WhatsApp Link -->
+                    <a href="https://wa.me/919543996929" target="_blank" class="btn-primary">WhatsApp</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Shreevardhann A. Built with Vanilla Web Tech.</p>
+        </div>
+    </footer>
+
+    <!-- CDNs for Animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
