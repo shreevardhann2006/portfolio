@@ -1,635 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of Shreevardhann A. — Software Developer">
-    <title>Shreevardhann A. | Software Developer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@400;600;700;800&family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Portfolio of Shreevardhann A. — Software Developer and Electronics Engineer">
+<meta name="theme-color" content="#050b12">
+<title>Shreevardhann A. | Software Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=Syne:wght@700;800&amp;display=swap" rel="stylesheet">
+<style>
+/* ══ RESET ══════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#050b12;--surface:rgba(255,255,255,0.03);--border:rgba(255,255,255,0.08);
+  --text:#eef2ff;--muted:rgba(238,242,255,0.42);
+  --cyan:#00e5ff;--green:#00f5a0;--purple:#b06ef3;
+  --r-lg:28px;--r-md:18px;
+  --spring:cubic-bezier(0.34,1.56,0.64,1);--out:cubic-bezier(0.22,1,0.36,1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--text);min-height:100dvh;overflow-x:hidden}
 
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ══ CURSOR ═════════════════════════════════════════════ */
+#c-dot,#c-ring{display:none;position:fixed;pointer-events:none;z-index:9999}
+@media(pointer:fine){body{cursor:none}#c-dot,#c-ring{display:block}}
+#c-dot{width:7px;height:7px;background:var(--cyan);border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--cyan);will-change:left,top}
+#c-ring{width:32px;height:32px;border:1.5px solid rgba(0,229,255,0.45);border-radius:50%;transform:translate(-50%,-50%);transition:width .2s var(--out),height .2s var(--out),border-color .2s;will-change:left,top}
+#c-ring.big{width:52px;height:52px;border-color:rgba(0,229,255,0.75)}
 
-        :root {
-            --cyan: #00f2fe;
-            --green: #00ff88;
-            --purple: #a855f7;
-            --bg: #060b14;
-        }
+/* ══ BACKGROUND ══════════════════════════════════════════ */
+#bg-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+.bg-glow{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse 68% 55% at 12% 18%,rgba(0,229,255,0.08) 0%,transparent 65%),
+             radial-gradient(ellipse 60% 65% at 88% 78%,rgba(176,110,243,0.09) 0%,transparent 65%),
+             radial-gradient(ellipse 50% 50% at 52% 52%,rgba(0,245,160,0.05) 0%,transparent 65%);
+  animation:bgB 14s ease-in-out infinite alternate}
+@keyframes bgB{from{opacity:.75;transform:scale(1)}to{opacity:1;transform:scale(1.05)}}
+.bg-grid{position:fixed;inset:0;z-index:2;pointer-events:none;
+  background-image:linear-gradient(rgba(0,229,255,0.022) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.022) 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(ellipse 85% 85% at center,black 5%,transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse 85% 85% at center,black 5%,transparent 80%)}
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:1;filter:blur(90px);will-change:transform;animation:orbD 18s ease-in-out infinite}
+.orb-a{width:min(460px,65vw);height:min(460px,65vw);background:var(--cyan);top:-80px;left:-80px;opacity:.07}
+.orb-b{width:min(360px,55vw);height:min(360px,55vw);background:var(--purple);bottom:-60px;right:-60px;opacity:.08;animation-delay:-7s}
+.orb-c{width:min(240px,42vw);height:min(240px,42vw);background:var(--green);top:58%;left:54%;opacity:.05;transform:translate(-50%,-50%);animation-delay:-13s}
+@keyframes orbD{0%,100%{transform:translate(0,0)scale(1)}33%{transform:translate(25px,-16px)scale(1.04)}66%{transform:translate(-16px,25px)scale(.96)}}
 
-        body {
-            background: var(--bg);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow: hidden;
-            color: #fff;
-            cursor: none;
-        }
+/* ══ PAGE ════════════════════════════════════════════════ */
+.page{position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100dvh;padding:clamp(3.5rem,8vh,6rem) clamp(1.2rem,6vw,3rem) clamp(4rem,9vh,6rem);text-align:center}
 
-        /* Custom cursor */
-        #cursor-dot {
-            position: fixed;
-            width: 8px; height: 8px;
-            background: var(--cyan);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 999999;
-            transform: translate(-50%, -50%);
-            transition: transform 0.05s;
-            box-shadow: 0 0 8px var(--cyan);
-        }
-        #cursor-ring {
-            position: fixed;
-            width: 36px; height: 36px;
-            border: 1.5px solid rgba(0,242,254,0.5);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 999998;
-            transform: translate(-50%, -50%);
-            transition: transform 0.12s ease, width 0.2s, height 0.2s;
-        }
+/* ══ BADGE ═══════════════════════════════════════════════ */
+.badge{display:inline-flex;align-items:center;gap:.55rem;padding:.35rem .9rem .35rem .6rem;border-radius:999px;background:rgba(0,245,160,0.07);border:1px solid rgba(0,245,160,0.2);font-size:clamp(.63rem,1.5vw,.72rem);font-weight:500;color:var(--green);letter-spacing:.04em;margin-bottom:clamp(1.8rem,4.5vh,2.8rem);opacity:0;animation:up .7s var(--out) .05s forwards}
+.badge-pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);flex-shrink:0;animation:pulse 2.2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.8)}}
 
-        /* Canvas background */
-        #bg-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 0;
-        }
+/* ══ HERO ════════════════════════════════════════════════ */
+.hero{margin-bottom:clamp(2rem,5vh,3.5rem)}
+.hero-eyebrow{font-size:clamp(.58rem,1.4vw,.68rem);letter-spacing:.38em;text-transform:uppercase;color:rgba(0,229,255,0.65);margin-bottom:clamp(.9rem,2.5vh,1.4rem);opacity:0;animation:up .7s var(--out) .2s forwards}
+.hero-name{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.8rem,10vw,7rem);line-height:.9;letter-spacing:-.035em;margin-bottom:clamp(.8rem,2.5vh,1.3rem);display:inline-block;position:relative;opacity:0;will-change:transform;animation:up .7s var(--out) .35s forwards}
+@media(prefers-reduced-motion:no-preference){.hero-name{animation:up .7s var(--out) .35s forwards,nameF 5s ease-in-out infinite 1.05s}}
+@keyframes nameF{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.name-line-1{display:block;background:linear-gradient(120deg,#fff 0%,#c8d8ff 45%,#fff 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shim 4s linear infinite}
+.name-line-2{display:block;font-size:.52em;letter-spacing:.08em;background:linear-gradient(120deg,var(--cyan) 0%,var(--purple) 50%,var(--cyan) 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shim 4s linear infinite reverse}
+@keyframes shim{0%{background-position:0% center}100%{background-position:200% center}}
 
-        /* Animated mesh gradient */
-        .mesh-bg {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 1;
-            background:
-                radial-gradient(ellipse 60% 50% at 20% 30%, rgba(0,242,254,0.07) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 60% at 80% 70%, rgba(168,85,247,0.07) 0%, transparent 70%),
-                radial-gradient(ellipse 40% 40% at 50% 50%, rgba(0,255,136,0.04) 0%, transparent 70%);
-            animation: meshShift 12s ease-in-out infinite alternate;
-            pointer-events: none;
-        }
+/* Glitch — desktop + no reduced motion */
+@media(prefers-reduced-motion:no-preference)and(pointer:fine){
+  .hero-name::before,.hero-name::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;background:inherit;-webkit-background-clip:text;background-clip:text}
+  .hero-name::before{-webkit-text-fill-color:var(--cyan);animation:g1 5s infinite 1.4s}
+  .hero-name::after{-webkit-text-fill-color:var(--purple);animation:g2 5s infinite 1.4s}
+  @keyframes g1{0%,88%,100%{clip-path:inset(50% 0 50% 0);transform:translate(0)}90%{clip-path:inset(8% 0 65% 0);transform:translate(-3px,2px)}92%{clip-path:inset(68% 0 8% 0);transform:translate(3px,-2px)}94%{clip-path:inset(28% 0 42% 0);transform:translate(-2px,1px)}}
+  @keyframes g2{0%,88%,100%{clip-path:inset(50% 0 50% 0);transform:translate(0)}89%{clip-path:inset(18% 0 52% 0);transform:translate(3px,-1px)}91%{clip-path:inset(58% 0 18% 0);transform:translate(-3px,2px)}93%{clip-path:inset(38% 0 28% 0);transform:translate(2px,-2px)}}
+}
 
-        @keyframes meshShift {
-            0%   { background-position: 20% 30%, 80% 70%, 50% 50%; }
-            100% { background-position: 30% 40%, 70% 60%, 60% 40%; }
-        }
+.hero-role{display:flex;align-items:center;justify-content:center;gap:.7rem;flex-wrap:wrap;font-size:clamp(.68rem,1.8vw,.88rem);color:var(--muted);letter-spacing:.12em;text-transform:uppercase;opacity:0;animation:up .7s var(--out) .55s forwards}
+.role-dot{width:4px;height:4px;border-radius:50%;background:rgba(0,229,255,0.38);flex-shrink:0}
 
-        /* Grid overlay */
-        .grid-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 2;
-            background-image:
-                linear-gradient(rgba(0,242,254,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,242,254,0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            mask-image: radial-gradient(ellipse 80% 80% at center, black, transparent);
-            pointer-events: none;
-        }
+/* ══ DIVIDER ═════════════════════════════════════════════ */
+.vdiv{width:1px;height:clamp(28px,5.5vh,44px);background:linear-gradient(to bottom,transparent,rgba(0,229,255,0.3),transparent);margin:0 auto clamp(1.4rem,3.5vh,2.2rem);opacity:0;animation:up .7s var(--out) .7s forwards}
 
-        /* Main gateway content */
-        .gateway {
-            position: fixed;
-            inset: 0;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 5rem 2rem 4rem;
-            overflow-y: auto;
-            text-align: center;
-        }
+/* ══ PROMPT ══════════════════════════════════════════════ */
+.prompt{font-size:clamp(.8rem,2vw,1rem);color:rgba(238,242,255,0.52);margin-bottom:clamp(1.3rem,3.5vh,2rem);opacity:0;animation:up .7s var(--out) .85s forwards}
 
-        /* Top eyebrow label */
-        .gw-eyebrow {
-            font-size: 0.72rem;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            color: var(--cyan);
-            margin-bottom: 1.2rem;
-            opacity: 0;
-            animation: fadeSlideUp 0.8s ease 0.3s forwards;
-        }
+/* ══ CARDS ═══════════════════════════════════════════════ */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,255px),1fr));gap:clamp(.9rem,3vw,1.3rem);width:100%;max-width:620px;opacity:0;animation:up .75s var(--out) 1.05s forwards}
+@media(max-width:479px){.cards{grid-template-columns:1fr}}
 
-        /* Name with glitch */
-        .gw-name {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 5.5rem);
-            font-weight: 800;
-            line-height: 1;
-            letter-spacing: -2px;
-            margin-bottom: 0.5rem;
-            opacity: 0;
-            animation: fadeSlideUp 0.8s ease 0.5s forwards, nameFloat 4s ease-in-out infinite 1.3s;
-            position: relative;
-            display: inline-block;
-        }
+.card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:clamp(1.5rem,4.5vw,2rem) clamp(1.3rem,4vw,1.85rem);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:transform .38s var(--spring),border-color .28s,box-shadow .38s;will-change:transform;-webkit-tap-highlight-color:transparent;text-align:left}
+.card:active{transform:scale(.96)}
+@media(pointer:fine){
+  .card:hover{transform:translateY(-13px)scale(1.015)}
+  .card:hover .card-glow{opacity:1}
+  .card:hover .card-topbar{opacity:1;transform:scaleX(1)}
+  .card:hover .card-icon{transform:scale(1.2)rotate(-6deg)}
+  .card:hover .card-arrow{transform:translateX(5px)}
+  .card:hover .card-cta{gap:.85rem}
+}
 
-        .gw-name span.word-1 { 
-            background: linear-gradient(90deg, #fff 0%, #e0e7ff 50%, #fff 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientFlow 3s linear infinite;
-        }
-        .gw-name span.word-2 {
-            background: linear-gradient(90deg, var(--cyan), var(--purple), var(--cyan));
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientFlow 3s linear infinite reverse;
-        }
+.card-topbar{position:absolute;top:0;left:0;right:0;height:2px;border-radius:var(--r-lg) var(--r-lg) 0 0;background:var(--acc);opacity:0;transform:scaleX(.35);transform-origin:left;transition:opacity .3s,transform .42s var(--out)}
+.card-glow{position:absolute;inset:0;border-radius:var(--r-lg);opacity:0;transition:opacity .45s;pointer-events:none;z-index:0}
 
-        @keyframes nameFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-        @keyframes gradientFlow {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
-        }
+.c-rec{--acc:var(--cyan)}
+.c-rec .card-glow{background:radial-gradient(ellipse 75% 55% at 0% 0%,rgba(0,229,255,0.13),transparent 70%)}
+@media(pointer:fine){.c-rec:hover{border-color:rgba(0,229,255,0.3);box-shadow:0 24px 60px rgba(0,229,255,0.08)}}
 
-        /* Glitch pseudo elements */
-        .gw-name::before,
-        .gw-name::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%;
-            background: inherit;
-            -webkit-background-clip: text;
-            background-clip: text;
-        }
-        .gw-name::before {
-            color: var(--cyan);
-            -webkit-text-fill-color: var(--cyan);
-            animation: glitch1 4s infinite;
-        }
-        .gw-name::after {
-            color: var(--purple);
-            -webkit-text-fill-color: var(--purple);
-            animation: glitch2 4s infinite;
-        }
+.c-vis{--acc:var(--green)}
+.c-vis .card-glow{background:radial-gradient(ellipse 75% 55% at 100% 100%,rgba(0,245,160,0.12),transparent 70%)}
+@media(pointer:fine){.c-vis:hover{border-color:rgba(0,245,160,0.3);box-shadow:0 24px 60px rgba(0,245,160,0.07)}}
 
-        @keyframes glitch1 {
-            0%, 90%, 100% { clip-path: inset(50% 0 50% 0); transform: translate(0); }
-            92%  { clip-path: inset(10% 0 60% 0); transform: translate(-3px, 2px); }
-            94%  { clip-path: inset(70% 0 10% 0); transform: translate(3px, -2px); }
-            96%  { clip-path: inset(30% 0 40% 0); transform: translate(-2px, 1px); }
-        }
-        @keyframes glitch2 {
-            0%, 90%, 100% { clip-path: inset(50% 0 50% 0); transform: translate(0); }
-            91%  { clip-path: inset(20% 0 50% 0); transform: translate(3px, -1px); }
-            93%  { clip-path: inset(60% 0 20% 0); transform: translate(-3px, 2px); }
-            95%  { clip-path: inset(40% 0 30% 0); transform: translate(2px, -2px); }
-        }
+.card-icon{position:relative;z-index:1;width:52px;height:52px;border-radius:var(--r-md);background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;color:var(--acc);box-shadow:0 0 22px color-mix(in srgb,var(--acc) 25%,transparent);margin-bottom:1.25rem;transition:transform .32s var(--spring);flex-shrink:0}
+.card-icon svg{width:22px;height:22px}
+.card-title{position:relative;z-index:1;font-family:'Syne',sans-serif;font-size:clamp(1.05rem,2.5vw,1.25rem);font-weight:800;color:var(--text);margin-bottom:.6rem;line-height:1.2}
+.card-desc{position:relative;z-index:1;font-size:clamp(.8rem,1.7vw,.88rem);color:var(--muted);line-height:1.68;margin-bottom:1.6rem;flex-grow:1}
+.card-cta{position:relative;z-index:1;display:inline-flex;align-items:center;gap:.5rem;font-size:clamp(.68rem,1.5vw,.76rem);font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);transition:gap .25s;margin-top:auto}
+.card-arrow{width:14px;height:14px;transition:transform .25s var(--out)}
 
-        /* Role typed text */
-        .gw-role {
-            font-size: clamp(0.8rem, 1.8vw, 1rem);
-            color: rgba(255,255,255,0.45);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeSlideUp 0.8s ease 0.7s forwards;
-        }
+/* ══ TAGS ════════════════════════════════════════════════ */
+.tags{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.55rem;margin-top:clamp(1.8rem,4.5vh,2.8rem);opacity:0;animation:up .75s var(--out) 1.5s forwards}
+.tag{display:inline-flex;align-items:center;gap:.4rem;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:.28rem .75rem;font-size:clamp(.6rem,1.3vw,.68rem);color:var(--muted);letter-spacing:.04em;white-space:nowrap}
+.tag-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.t-cyan .tag-dot{background:var(--cyan);box-shadow:0 0 6px var(--cyan)}
+.t-green .tag-dot{background:var(--green);box-shadow:0 0 6px var(--green)}
+.t-purple .tag-dot{background:var(--purple);box-shadow:0 0 6px var(--purple)}
 
-        /* Divider */
-        .gw-divider {
-            width: 60px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-            margin: 0 auto 1.5rem;
-            opacity: 0;
-            animation: fadeSlideUp 0.8s ease 0.9s forwards;
-        }
+/* ══ SCROLL HINT ═════════════════════════════════════════ */
+.scroll-hint{position:fixed;bottom:max(1.4rem,env(safe-area-inset-bottom,1.4rem));left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(238,242,255,0.18);pointer-events:none;opacity:0;animation:up 1s var(--out) 2.4s forwards}
+.scroll-line{width:1px;height:26px;background:linear-gradient(to bottom,rgba(0,229,255,0.4),transparent);animation:scP 2s ease infinite}
+@keyframes scP{0%,100%{opacity:.28;transform:scaleY(1)}50%{opacity:1;transform:scaleY(.5)}}
 
-        /* Question */
-        .gw-question {
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
-            color: rgba(255,255,255,0.6);
-            margin-bottom: 1.5rem;
-            text-align: center;
-            opacity: 0;
-            animation: fadeSlideUp 0.8s ease 1.1s forwards;
-        }
+.cdots{position:fixed;pointer-events:none;z-index:3;opacity:.1}
+.cdots-tr{top:1.2rem;right:1.2rem}
+.cdots-bl{bottom:1.2rem;left:1.2rem}
+@media(max-width:420px){.cdots{display:none}}
 
-        /* Cards row */
-        .gw-cards {
-            display: flex;
-            gap: 1.2rem;
-            flex-wrap: nowrap;
-            justify-content: center;
-            align-items: stretch;
-            opacity: 0;
-            animation: fadeSlideUp 0.9s ease 1.3s forwards;
-        }
-        @media (max-width: 680px) {
-            .gw-cards { flex-wrap: wrap; }
-        }
+/* ══ ANIMATION ═══════════════════════════════════════════ */
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 
-        /* Individual card */
-        .gw-card {
-            position: relative;
-            width: 280px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.07);
-            border-radius: 24px;
-            padding: 2rem 1.8rem 1.8rem;
-            cursor: pointer;
-            overflow: hidden;
-            backdrop-filter: blur(20px);
-            transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), border-color 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
+/* ══ REDUCED MOTION ══════════════════════════════════════ */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .badge,.hero-eyebrow,.hero-name,.hero-role,.vdiv,.prompt,.cards,.tags,.scroll-hint{opacity:1!important;transform:none!important}
+  #bg-canvas{display:none}
+}
 
-        .gw-card:hover {
-            transform: translateY(-10px) scale(1.02);
-        }
+/* ══ LANDSCAPE PHONES ════════════════════════════════════ */
+@media(max-height:580px)and(orientation:landscape){
+  .page{padding-top:2.2rem;padding-bottom:3rem}
+  .badge{margin-bottom:1rem}.hero{margin-bottom:1.2rem}
+  .vdiv{display:none}.tags{margin-top:1rem}
+  .hero-name{font-size:clamp(2rem,6vw,3.5rem)}.cards{max-width:100%}
+}
 
-        /* Card top accent bar */
-        .gw-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: var(--card-color, var(--cyan));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .gw-card:hover::before { opacity: 1; }
-
-        /* Animated border glow on hover */
-        .gw-card-glow {
-            position: absolute;
-            inset: 0;
-            border-radius: 24px;
-            opacity: 0;
-            transition: opacity 0.5s;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .gw-card:hover .gw-card-glow { opacity: 1; }
-
-        .card-recruiter { --card-color: var(--cyan); }
-        .card-recruiter .gw-card-glow {
-            background: radial-gradient(circle at top left, rgba(0,242,254,0.12), transparent 70%);
-        }
-        .card-recruiter:hover { border-color: rgba(0,242,254,0.3); }
-
-        .card-visitor { --card-color: var(--green); }
-        .card-visitor .gw-card-glow {
-            background: radial-gradient(circle at bottom right, rgba(0,255,136,0.12), transparent 70%);
-        }
-        .card-visitor:hover { border-color: rgba(0,255,136,0.3); }
-
-        /* Card icon circle */
-        .gw-card-icon {
-            position: relative;
-            z-index: 1;
-            width: 52px; height: 52px;
-            border-radius: 14px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s;
-        }
-        .card-recruiter .gw-card-icon {
-            background: rgba(0,242,254,0.12);
-            color: var(--cyan);
-            box-shadow: 0 0 20px rgba(0,242,254,0.2);
-        }
-        .card-visitor .gw-card-icon {
-            background: rgba(0,255,136,0.12);
-            color: var(--green);
-            box-shadow: 0 0 20px rgba(0,255,136,0.2);
-        }
-        .gw-card:hover .gw-card-icon { transform: scale(1.15) rotate(-5deg); }
-
-        .gw-card-title {
-            position: relative;
-            z-index: 1;
-            font-family: 'Syne', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 0.75rem;
-            line-height: 1.3;
-        }
-
-        .gw-card-desc {
-            position: relative;
-            z-index: 1;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.45);
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        /* Card CTA arrow */
-        .gw-card-cta {
-            position: relative;
-            z-index: 1;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.82rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--card-color, var(--cyan));
-            transition: gap 0.3s;
-        }
-        .gw-card:hover .gw-card-cta { gap: 0.9rem; }
-
-        /* Floating orb decorations */
-        .gw-orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.12;
-            pointer-events: none;
-            animation: orbDrift 15s ease-in-out infinite;
-        }
-        .gw-orb-1 {
-            width: 500px; height: 500px;
-            background: var(--cyan);
-            top: -100px; left: -100px;
-            animation-delay: 0s;
-        }
-        .gw-orb-2 {
-            width: 400px; height: 400px;
-            background: var(--purple);
-            bottom: -80px; right: -80px;
-            animation-delay: -5s;
-        }
-        .gw-orb-3 {
-            width: 300px; height: 300px;
-            background: var(--green);
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            animation-delay: -10s;
-            opacity: 0.05;
-        }
-
-        @keyframes orbDrift {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33%       { transform: translate(30px, -20px) scale(1.05); }
-            66%       { transform: translate(-20px, 30px) scale(0.95); }
-        }
-
-        /* Scroll indicator */
-        .gw-scroll-hint {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.72rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.25);
-            opacity: 0;
-            animation: fadeSlideUp 1s ease 2s forwards;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .gw-scroll-hint::after {
-            content: '';
-            width: 1px;
-            height: 30px;
-            background: linear-gradient(to bottom, rgba(0,242,254,0.5), transparent);
-            animation: scrollPulse 2s ease infinite;
-        }
-        @keyframes scrollPulse {
-            0%, 100% { opacity: 0.3; transform: scaleY(1); }
-            50%       { opacity: 1; transform: scaleY(0.6); }
-        }
-
-        /* Shared fade-up animation */
-        @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Floating dots corner decoration */
-        .gw-dots {
-            position: fixed;
-            pointer-events: none;
-            z-index: 3;
-        }
-        .gw-dots-tr { top: 2rem; right: 2rem; }
-        .gw-dots-bl { bottom: 2rem; left: 2rem; }
-        .gw-dots svg { opacity: 0.15; }
-
-        /* Tag line at top */
-        .gw-topbar {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 999px;
-            padding: 0.45rem 1.2rem;
-            font-size: 0.78rem;
-            margin-bottom: 2rem;
-            color: rgba(255,255,255,0.4);
-            z-index: 20;
-            opacity: 0;
-            animation: fadeSlideUp 0.8s ease 0.1s forwards;
-        }
-        .gw-topbar .dot {
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: var(--green);
-            box-shadow: 0 0 8px var(--green);
-            animation: blink 2s ease infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-    </style>
+/* ══ TINY PHONES < 340px ═════════════════════════════════ */
+@media(max-width:340px){
+  .hero-name{font-size:2.4rem;letter-spacing:-.02em}
+  .card{border-radius:20px}
+  .hero-role{gap:.45rem}
+}
+</style>
 </head>
 
 <body>
-    <!-- Cursor -->
-    <div id="cursor-dot"></div>
-    <div id="cursor-ring"></div>
 
-    <!-- Animated background canvas -->
-    <canvas id="bg-canvas"></canvas>
-    <div class="mesh-bg"></div>
-    <div class="grid-overlay"></div>
+<div id="c-dot"  aria-hidden="true"></div>
+<div id="c-ring" aria-hidden="true"></div>
 
-    <!-- Floating orbs -->
-    <div class="gw-orb gw-orb-1" style="z-index:3;"></div>
-    <div class="gw-orb gw-orb-2" style="z-index:3;"></div>
-    <div class="gw-orb gw-orb-3" style="z-index:3;"></div>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<div class="bg-glow" aria-hidden="true"></div>
+<div class="bg-grid"  aria-hidden="true"></div>
+<div class="orb orb-a" aria-hidden="true"></div>
+<div class="orb orb-b" aria-hidden="true"></div>
+<div class="orb orb-c" aria-hidden="true"></div>
 
-    <!-- Corner dots decoration -->
-    <div class="gw-dots gw-dots-tr">
-        <svg width="80" height="80" viewBox="0 0 80 80">
-            <pattern id="d1" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-                <circle cx="1.5" cy="1.5" r="1.5" fill="white"/>
-            </pattern>
-            <rect width="80" height="80" fill="url(#d1)"/>
+<div class="cdots cdots-tr" aria-hidden="true">
+  <svg width="60" height="60" viewBox="0 0 80 80">
+    <pattern id="p1" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.5" fill="white"/></pattern>
+    <rect width="80" height="80" fill="url(#p1)"/>
+  </svg>
+</div>
+<div class="cdots cdots-bl" aria-hidden="true">
+  <svg width="60" height="60" viewBox="0 0 80 80">
+    <pattern id="p2" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.5" fill="white"/></pattern>
+    <rect width="80" height="80" fill="url(#p2)"/>
+  </svg>
+</div>
+
+<main class="page">
+
+  <div class="badge" role="status">
+    <span class="badge-pulse" aria-hidden="true"></span>
+    Open to new opportunities
+  </div>
+
+  <div class="hero">
+    <p class="hero-eyebrow">Welcome to my universe</p>
+    <h1 class="hero-name" data-text="Shreevardhann A.">
+      <span class="name-line-1">Shreevardhann</span>
+      <span class="name-line-2">A.</span>
+    </h1>
+    <p class="hero-role">
+      Software Developer
+      <span class="role-dot" aria-hidden="true"></span>
+      Electronics Engineer
+    </p>
+  </div>
+
+  <div class="vdiv" aria-hidden="true"></div>
+
+  <p class="prompt">Who are you visiting as?</p>
+
+  <div class="cards" role="group" aria-label="Select your role">
+
+    <div class="card c-rec"
+         id="card-rec"
+         role="button" tabindex="0"
+         aria-label="Enter as Recruiter or Hiring Manager"
+         onclick="enterPortfolio('recruiter')"
+         onkeydown="if(event.key==='Enter'||event.key===' ')enterPortfolio('recruiter')">
+      <div class="card-topbar" aria-hidden="true"></div>
+      <div class="card-glow"   aria-hidden="true"></div>
+      <div class="card-icon"   aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="7" width="20" height="14" rx="2.5"/>
+          <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+          <line x1="8" y1="12" x2="16" y2="12"/>
+          <line x1="12" y1="9"  x2="12" y2="15"/>
         </svg>
-    </div>
-    <div class="gw-dots gw-dots-bl">
-        <svg width="80" height="80" viewBox="0 0 80 80">
-            <pattern id="d2" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
-                <circle cx="1.5" cy="1.5" r="1.5" fill="white"/>
-            </pattern>
-            <rect width="80" height="80" fill="url(#d2)"/>
+      </div>
+      <h3 class="card-title">Recruiter / Hiring?</h3>
+      <p  class="card-desc">Explore my projects, technical skills, and professional experience — curated for you.</p>
+      <span class="card-cta" aria-hidden="true">
+        View Portfolio
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
         </svg>
+      </span>
     </div>
 
-    <!-- Main content -->
-    <div class="gateway">
-        <!-- Top status bar -->
-        <div class="gw-topbar">
-            <span class="dot"></span>
-            Available for opportunities
-        </div>
-
-        <p class="gw-eyebrow">Welcome to my universe</p>
-
-        <h1 class="gw-name" data-text="Shreevardhann A.">
-            <span class="word-1">Shreevardhann</span>&nbsp;<span class="word-2">A.</span>
-        </h1>
-
-        <p class="gw-role">Software Developer &nbsp;·&nbsp; Electronics Engineer</p>
-        <div class="gw-divider"></div>
-
-        <p class="gw-question">Who are you visiting as?</p>
-
-        <div class="gw-cards">
-            <!-- Recruiter -->
-            <div class="gw-card card-recruiter" onclick="enterPortfolio('recruiter')" id="card-rec">
-                <div class="gw-card-glow"></div>
-                <div class="gw-card-icon"><i class="fa-solid fa-briefcase"></i></div>
-                <h3 class="gw-card-title">Recruiter / Hiring?</h3>
-                <p class="gw-card-desc">View my projects, skills, and professional experience curated just for you.</p>
-                <span class="gw-card-cta">Explore Work <i class="fa-solid fa-arrow-right"></i></span>
-            </div>
-
-            <!-- Visitor -->
-            <div class="gw-card card-visitor" onclick="enterPortfolio('visitor')" id="card-vis">
-                <div class="gw-card-glow"></div>
-                <div class="gw-card-icon"><i class="fa-solid fa-user-group"></i></div>
-                <h3 class="gw-card-title">Visitor / Teammate?</h3>
-                <p class="gw-card-desc">Discover stories, memories, and the real person behind the code.</p>
-                <span class="gw-card-cta">Get to Know Me <i class="fa-solid fa-arrow-right"></i></span>
-            </div>
-        </div>
+    <div class="card c-vis"
+         id="card-vis"
+         role="button" tabindex="0"
+         aria-label="Enter as Visitor or Teammate"
+         onclick="enterPortfolio('visitor')"
+         onkeydown="if(event.key==='Enter'||event.key===' ')enterPortfolio('visitor')">
+      <div class="card-topbar" aria-hidden="true"></div>
+      <div class="card-glow"   aria-hidden="true"></div>
+      <div class="card-icon"   aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+      <h3 class="card-title">Visitor / Teammate?</h3>
+      <p  class="card-desc">Discover the stories, passions, and the real person behind the code.</p>
+      <span class="card-cta" aria-hidden="true">
+        Get to Know Me
+        <svg class="card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </span>
     </div>
 
-    <script>
-        // ---- Cursor ----
-        const dot = document.getElementById('cursor-dot');
-        const ring = document.getElementById('cursor-ring');
-        document.addEventListener('mousemove', e => {
-            dot.style.left = e.clientX + 'px';
-            dot.style.top  = e.clientY + 'px';
-            ring.style.left = e.clientX + 'px';
-            ring.style.top  = e.clientY + 'px';
-        });
-        document.querySelectorAll('.gw-card').forEach(el => {
-            el.addEventListener('mouseenter', () => { ring.style.width = '60px'; ring.style.height = '60px'; });
-            el.addEventListener('mouseleave', () => { ring.style.width = '36px'; ring.style.height = '36px'; });
-        });
+  </div>
 
-        // ---- Particle canvas ----
-        (function() {
-            const canvas = document.getElementById('bg-canvas');
-            const ctx = canvas.getContext('2d');
-            let W, H, particles = [];
+  <div class="tags" aria-label="Technology highlights">
+    <span class="tag t-cyan">  <span class="tag-dot" aria-hidden="true"></span>React &amp; Next.js</span>
+    <span class="tag t-green"> <span class="tag-dot" aria-hidden="true"></span>Embedded Systems</span>
+    <span class="tag t-purple"><span class="tag-dot" aria-hidden="true"></span>Python / C++</span>
+  </div>
 
-            function resize() {
-                W = canvas.width  = window.innerWidth;
-                H = canvas.height = window.innerHeight;
-            }
-            resize();
-            window.addEventListener('resize', resize);
+</main>
 
-            class Particle {
-                constructor() { this.reset(); }
-                reset() {
-                    this.x = Math.random() * W;
-                    this.y = Math.random() * H;
-                    this.r = Math.random() * 1.5 + 0.3;
-                    this.vx = (Math.random() - 0.5) * 0.3;
-                    this.vy = (Math.random() - 0.5) * 0.3;
-                    this.alpha = Math.random() * 0.5 + 0.1;
-                    const c = [
-                        `rgba(0,242,254,${this.alpha})`,
-                        `rgba(168,85,247,${this.alpha})`,
-                        `rgba(0,255,136,${this.alpha})`
-                    ];
-                    this.color = c[Math.floor(Math.random() * c.length)];
-                }
-                update() {
-                    this.x += this.vx; this.y += this.vy;
-                    if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
-                }
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-                    ctx.fillStyle = this.color;
-                    ctx.fill();
-                }
-            }
+<div class="scroll-hint" aria-hidden="true">
+  <span>Scroll</span>
+  <div class="scroll-line"></div>
+</div>
 
-            for (let i = 0; i < 120; i++) particles.push(new Particle());
+<script>
+(function(){
+  'use strict';
 
-            function connectParticles() {
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < 100) {
-                            ctx.beginPath();
-                            ctx.strokeStyle = `rgba(0,242,254,${0.04 * (1 - dist / 100)})`;
-                            ctx.lineWidth = 0.5;
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                }
-            }
+  /* Cursor */
+  if(window.matchMedia('(pointer:fine)').matches){
+    const dot=document.getElementById('c-dot'),ring=document.getElementById('c-ring');
+    let cx=-300,cy=-300,pend=false;
+    const flush=()=>{dot.style.left=ring.style.left=cx+'px';dot.style.top=ring.style.top=cy+'px';pend=false};
+    document.addEventListener('mousemove',e=>{cx=e.clientX;cy=e.clientY;if(!pend){pend=true;requestAnimationFrame(flush)}},{passive:true});
+    document.querySelectorAll('.card').forEach(el=>{
+      el.addEventListener('mouseenter',()=>ring.classList.add('big'));
+      el.addEventListener('mouseleave',()=>ring.classList.remove('big'));
+    });
+  }
 
-            function animate() {
-                ctx.clearRect(0, 0, W, H);
-                particles.forEach(p => { p.update(); p.draw(); });
-                connectParticles();
-                requestAnimationFrame(animate);
-            }
-            animate();
-        })();
+  /* Particles */
+  const noM=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const cv=document.getElementById('bg-canvas');
+  if(!noM&&cv){
+    const ctx=cv.getContext('2d',{alpha:true});
+    const mob=window.innerWidth<720;
+    const N=mob?45:90,DIST=mob?70:90,FPS=mob?38:60,STEP=1000/FPS;
+    let W=cv.width=window.innerWidth,H=cv.height=window.innerHeight;
+    let rt;
+    window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{W=cv.width=window.innerWidth;H=cv.height=window.innerHeight},160)},{passive:true});
+    const PAL=[[0,229,255],[176,110,243],[0,245,160]];
+    function mkP(init){const s=mob?.16:.26;return{x:Math.random()*W,y:init?Math.random()*H:(Math.random()<.5?-2:H+2),r:Math.random()*1.25+.22,vx:(Math.random()-.5)*s,vy:(Math.random()-.5)*s,a:Math.random()*.42+.08,c:PAL[Math.floor(Math.random()*3)]}}
+    const pts=Array.from({length:N},(_,i)=>mkP(true));
+    function link(){
+      const cs=DIST,gc=Math.ceil(W/cs),gr=Math.ceil(H/cs);
+      const cells=Array.from({length:gc*gr},()=>[]);
+      pts.forEach((p,i)=>{const c=Math.floor(p.x/cs),r=Math.floor(p.y/cs);if(c>=0&&c<gc&&r>=0&&r<gr)cells[r*gc+c].push(i)});
+      for(let r=0;r<gr;r++)for(let c=0;c<gc;c++){
+        const cell=cells[r*gc+c];
+        const nbs=[cell,c+1<gc?cells[r*gc+c+1]:[],r+1<gr?cells[(r+1)*gc+c]:[],c+1<gc&&r+1<gr?cells[(r+1)*gc+c+1]:[],c>0&&r+1<gr?cells[(r+1)*gc+c-1]:[]];
+        for(let ni=0;ni<nbs.length;ni++){const nb=nbs[ni];for(let a=0;a<cell.length;a++){const pa=pts[cell[a]],bs=ni===0?a+1:0;for(let b=bs;b<nb.length;b++){const pb=pts[nb[b]],dx=pa.x-pb.x,dy=pa.y-pb.y,d2=dx*dx+dy*dy;if(d2<cs*cs){ctx.beginPath();ctx.strokeStyle=`rgba(0,229,255,${.032*(1-Math.sqrt(d2)/cs)})`;ctx.lineWidth=.5;ctx.moveTo(pa.x,pa.y);ctx.lineTo(pb.x,pb.y);ctx.stroke()}}}}
+      }
+    }
+    let last=0;
+    (function tick(ts){requestAnimationFrame(tick);if(ts-last<STEP)return;last=ts;ctx.clearRect(0,0,W,H);pts.forEach((p,i)=>{p.x+=p.vx;p.y+=p.vy;if(p.x<-3||p.x>W+3||p.y<-3||p.y>H+3)pts[i]=mkP(false);ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.2832);ctx.fillStyle=`rgba(${p.c[0]},${p.c[1]},${p.c[2]},${p.a})`;ctx.fill()});link()})(0);
+  }
 
-        // ---- Navigation ----
-        window.enterPortfolio = function(type) {
-            const body = document.body;
-            body.style.transition = 'opacity 0.5s ease';
-            body.style.opacity = '0';
-            setTimeout(() => {
-                window.location.href = type === 'recruiter' ? 'recruiter.html' : 'visitor.html';
-            }, 500);
-        };
-    </script>
+  /* Nav */
+  window.enterPortfolio=function(type){
+    document.body.style.transition='opacity .42s ease';
+    document.body.style.opacity='0';
+    setTimeout(()=>{location.href=type==='recruiter'?'recruiter.html':'visitor.html'},420);
+  };
+})();
+</script>
+
 </body>
 </html>
